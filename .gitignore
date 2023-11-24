@@ -1,0 +1,14 @@
+# Node.js
+node_modules/
+
+# Configuration
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# IDE files
+.vscode/
+
