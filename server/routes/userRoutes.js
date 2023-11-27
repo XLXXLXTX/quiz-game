@@ -1,1 +1,24 @@
-/* TODO: define routes to call controllers (for user objects) */
+/* define routes to call controllers */
+
+const express = require('express');
+const userController = require('../controllers/userController');
+
+const { showLoginPage, showSignUpPage } = require('../controllers/userController');
+
+const router = express.Router();
+
+// route to retrieve all user from DB 
+router.get('/users', checkAuth, userController.getAllUsers);
+
+// routes for user login
+router.get('/login', showLoginPage);
+router.post('/login', userController.logIn);
+
+// routes for signup
+router.get('/signup', showSignUpPage);
+router.post('/signup', userController.signUp);
+
+
+
+
+module.exports = router;
