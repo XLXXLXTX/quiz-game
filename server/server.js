@@ -9,6 +9,8 @@ const dotenv = require('dotenv').config()
 const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 // import module for real time WebSockets
 const socketIo = require('socket.io');
@@ -29,6 +31,17 @@ const app = express();
 // use body parser to process data from forms
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
+
+// allow cookie transfer to auth users
+const corsOptions = {
+  origin: ['http://localhost'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
+
 
 // config to use static files from public folder
 app.use('/public', express.static('public'));

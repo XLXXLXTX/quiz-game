@@ -3,6 +3,7 @@
 // lib to hash user's passwords to store them encrypted, increasing security
 const bcrypt = require('bcrypt')
 const path = require('path');
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
@@ -76,7 +77,14 @@ const logIn = async (req, res) => {
         return res.status(401).json( {message: 'Incorrect username or password: please try again.'})
     }
 
-    res.json( {message: 'Log in sucessfully'})
+    // create jsw token 
+    const token = await jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRATION,
+    });
+
+    // create a cookie with token
+    return res.cookie("token", token, { httpOnly: true }).json({ success: true, message: 'LoggedIn Successfully' });
+    //res.json( {message: 'Log in sucessfully'})
 
   } catch (error) {
     console.log('ERROR: Error in logIn()', error);
