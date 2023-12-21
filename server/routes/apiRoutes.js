@@ -1,0 +1,32 @@
+const express = require('express');
+
+const userController = require('../controllers/userController');
+const scoreController = require('../controllers/scoreController');
+const questionController = require('../controllers/questionController');
+
+const auth = require('../middleware/auth');
+
+const router = express.Router();
+
+// routes for API: check DB content without using web browser interface
+router.get('/users', userController.getAllUsers);
+router.get('/scores', scoreController.getTop)
+router.get('/questions', questionController.getAllQuestions)
+
+router.get('/decode-token', auth.decodeToken);
+
+// --------------------------------------------------
+// FOR TESTING PURPOSES ONLY
+// --------------------------------------------------
+
+const path = require('path');
+
+const showColorPage = (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/color-palette.html'))
+};
+
+router.get('/colors', showColorPage);
+
+// --------------------------------------------------
+
+module.exports = router;

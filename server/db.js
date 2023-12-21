@@ -8,10 +8,10 @@ const connectDB = async () => {
     // load db uri for mongoose connection 
     const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.zmy1u5t.mongodb.net/${process.env.MONGODB_DB}`;
 
-    console.log(uri)
+    console.log(`⌛ Connecting to Database with the string connection:\n\t ${uri}`)
     await mongoose.connect(uri);
 
-    console.log('✅ Connected to MongoDB! ');
+    console.log('✅ Connected to MongoDB!');
   } catch (error) {
     console.error('❌ Error in the connection :', error);
   }

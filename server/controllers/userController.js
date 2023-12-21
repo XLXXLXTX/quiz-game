@@ -24,8 +24,8 @@ const getAllUsers = async (req, res) => {
 // function to register a new user in the application
 const signUp = async (req, res) => {
   
-  console.log("req.body")
-  console.log(req.body)
+  // console.log("req.body")
+  // console.log(req.body)
   // destructuring from the req.body into vars
   const { username, password } = req.body;
 
@@ -46,7 +46,14 @@ const signUp = async (req, res) => {
     const newUser = new User( { "username": username, "password": hashedPassword} );
     await newUser.save();
 
-    res.json( {message: 'New user registered.'} )
+    // Generate JWT token
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRATION,
+    });
+
+    console.log(`\t\tRegistered successfully: ${newUser.username} - ${password} - ${token}`)
+
+    res.cookie("token", token, { httpOnly: true }).redirect("/");   //.json( {message: 'New user registered.'} )
 
   } catch (error){
       console.log('ERROR: Error in signUp():', error);
@@ -81,9 +88,10 @@ const logIn = async (req, res) => {
     const token = await jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRATION,
     });
-
+    
     // create a cookie with token
-    return res.cookie("token", token, { httpOnly: true }).json({ success: true, message: 'LoggedIn Successfully' });
+    // and redirect to home page
+    return res.cookie("token", token, { httpOnly: true }).redirect("/") //json({ success: true, message: 'LoggedIn Successfully' });
     //res.json( {message: 'Log in sucessfully'})
 
   } catch (error) {
@@ -96,21 +104,19 @@ const logIn = async (req, res) => {
 //--------------------------------------------------------------------
 
 //Show login entry page
-const showLoginPage = (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/login.html'));
-}; 
+////const showLoginPage = (req, res) => {
+////  res.sendFile(path.join(__dirname, '../views/login.html'));
+////}; 
 
 //Show signup entry page
-const showSignUpPage = (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/signup.html'))
-}
+////const showSignUpPage = (req, res) => {
+////  res.sendFile(path.join(__dirname, '../views/signup.html'))
+////}
 
 // export this functions to call them from other files  
 module.exports = { getAllUsers,
                    signUp,
-                   logIn,
-                   showLoginPage,
-                   showSignUpPage
+                   logIn
                  };
 
 

@@ -20,7 +20,9 @@ const socketIo = require('socket.io');
 const { connectDB } = require('./db');
 
 // load routes
-const userRoutes = require('./routes/userRoutes');
+////const userRoutes = require('./routes/userRoutes');
+const homeRoutes = require('./routes/homeRoutes');
+const apiRoutes = require('./routes/apiRoutes');
 
 //--------------------------------------------------
 // SERVER CONFIG / INSTANCE SECTION
@@ -62,8 +64,14 @@ connectDB();
 // ROUTES SECTION
 //--------------------------------------------------
 
+// set the default entry point in web browser
+app.use('/', homeRoutes);
+
+// set default entry point for API
+app.use('/api', apiRoutes);
+
 // config routes for the app, from the file userRoutes.js  
-app.use('/api/users', userRoutes);
+//app.use('/api/users', userRoutes);
 
 
 //--------------------------------------------------
@@ -75,5 +83,5 @@ const PORT = process.env.PORT || 3000;
 
 // start server to listen connections on designed port 
 server.listen(PORT, () => {
-  console.log(`Server innitiated in port ${PORT}`);
+  console.log(`✅ Server innitiated in port ${PORT}`);
 });
