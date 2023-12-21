@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #121327;
+    font-family: 'Lexend', sans-serif;
+    color: #fff;
+}
+
+.center-div {
+    background-color: #fff;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-width: 200px;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.div-option {
+    background-color: #6563b2;
+    border: 1px solid #2a3965;
+}
+
+.center-div.div-option:hover {
+    cursor: pointer;
+}
+
+.login-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.login-btn:hover {
+    background-color: #2980b9;
+    cursor: pointer;
+}

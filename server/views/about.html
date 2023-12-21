@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>About Us</title>
+	<link rel="stylesheet" href="../../public/css/about.css">
+
+	<script>
+		function goBack() {
+			window.location.href = "/";
+		}
+	</script>
+
+</head>
+
+<body>
+
+	<button class="back-button" onclick="goBack()">Go Back</button>
+
+	<div class="header">
+		<h1>About us</h1>
+	</div>
+
+	<div class="about-us-text">
+
+		<h3>How to play:</h3>
+		To play the game, you must first register an account. Once you have registered, you can log in and join a game
+		session.<br>
+		The game will start once the host has started the game session. You will be presented with a series of
+		questions, and you must answer them within the time limit. The faster you answer, the more points you will
+		earn.<br>
+		The game will end once all questions have been answered. The player with the most points wins!
+
+		<br><br>
+
+		<h3>Description:</h3>
+		Online quiz game where users can compete in real-time by answering questions across various categories.
+
+		<br><br>
+
+		<h3>Functionalities:</h3>
+
+		<li>Players can register, log in, and join games (to answer questions within a time limit and earn points based
+			on correct answers)</li>
+		<li>Questions will be retrieved from an API called <b><a href='https://opentdb.com/api_config.php'> 'Open Trivia
+					Database' </a></b> or added by users (possibly with an admin role)</li>
+		<li>Scores will be stored in a database to display a leaderboard featuring the top players with statistics about
+			their games</li>
+
+		<br>
+
+		<h3>Technology stack:</h3>
+		This project will be built using the following technologies:<br>
+
+		<li><b>Frontend</b>: HTML, CSS, JavaScript for creating an interactive user interface</li>
+		<li><b>Backend</b>: NodeJS + Express.js </li>
+		<li><b>Database</b>: MongoDB / MySQL for storing user data, questions, and game-related information</li>
+
+	</div>
+
+</body>
+
+</html>

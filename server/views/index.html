@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Quiz Game</title>
+	<link rel="stylesheet" href="../../public/css/index.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+	<script>
+
+		function redirect(page) {
+			window.location.href = page;
+		}
+
+		// obtain 'token' from the cookie
+		function getCookie(name) {
+			const value = `; ${document.cookie}`;
+			const parts = value.split(`; ${name}=`);
+			if (parts.length === 2) return parts.pop().split(';').shift();
+		}
+
+		// Function to decode the token on the backend and display user info
+		async function displayUserInfo() {
+			//alert("Llega ...");
+			// Get the token from the cookie
+			const token = getCookie('token');
+			//alert(token);
+			if (token) {
+				try {
+					// Make a request to the backend to decode the token
+					const response = await axios.post('/api/decode-token', { token });
+
+					// Display user information in the 'user-info' div
+					const userInfoDiv = document.getElementById('user-info');
+					userInfoDiv.innerHTML = `Welcome, ${response.data.username}!`;
+					//alert("Welcome ...");
+				} catch (error) {
+					console.error('Error decoding token:', error);
+				}
+			}
+		}
+
+		// Call the function when the page loads
+		displayUserInfo();
+
+	</script>
+</head>
+
+<body>
+	<!-- centered collumn with all the options in the start page -->
+	<div class="center-div div-option" onclick="redirect('/start-quiz')">
+		<h2>Start Quiz!</h2>
+	</div>
+
+	<div class="center-div div-option" onclick="redirect('/questions')">
+		<h2>Questions</h2>
+	</div>
+
+	<div class="center-div div-option" onclick="redirect('/scoreboard')">
+		<h2>Scoreboard</h2>
+	</div>
+
+	<div class="center-div div-option" onclick="redirect('/about')">
+		<h2>About us</h2>
+	</div>
+
+	<!-- button for login in top left corner-->
+	<button class="login-btn" onclick="redirect('/login')">Login</button>
+	<!-- div where username will be displayed -->
+	<div id="user-info"></div>
+
+
+</body>
+
+</html>
