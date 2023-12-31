@@ -30,21 +30,56 @@ body {
     margin-bottom: 20px;
 }
 
+
 table {
-    width: 80%;
+    width: 100%;
     border-collapse: collapse;
-    margin: 20px;
+    /*margin-top: 125%;*/ /* testing */
+    margin-top: 15%;
+    margin-bottom: 25px;
+    padding: 12px;
+    border-radius: 12px 12px 0 0;
+
+    box-shadow: 0 2px 15px rgba(64, 64, 64, .7);
+    
 }
 
-th,
-td {
-    border: 1px solid #ddd;
-    padding: 8px;
+/* .table-questions-users {
+    margin-top: 125%;
+    box-shadow: 0 2px 15px red;
+
+}
+
+.table-trivia {
+    
+    margin-top: 50px;
+} */
+
+td,
+th {
+    padding: 15px 20px;
+    text-align: center;
     text-align: left;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #6563b2;
+    color: black;
+    font-family: 'Lexend', Sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+tr {
+    color: black;
+    width: 100%;
+    background-color: #fafafa;
+    font-family: 'Lexend', sans-serif;
+}
+
+tr:nth-child(even) {
+    background-color: #eeeeee;
 }
 
 .back-button {
@@ -91,6 +126,7 @@ th {
     padding: 20px;
     box-sizing: border-box;
     height: 150px;
+    transition: transform 0.2s ease-in-out;
 }
 
 /* Media query for smaller screens */
@@ -140,6 +176,8 @@ th {
 
 .card:hover {
     cursor: pointer;
+    transform: scale(1.05);
+    border: 5px solid white;
 }
 
 .category-any {
@@ -176,6 +214,10 @@ th {
 
 .category-games {
     background-color: #f39c12;
+}
+
+.category-board-games {
+    background-color: #1ffc17;
 }
 
 .category-anime {

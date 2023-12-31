@@ -5,8 +5,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Quiz Questions</title>
+	
 	<link rel="stylesheet" href="../../public/css/questions.css">
+	<link rel="stylesheet" href="../../public/css/modal.css">
 
+	<script type="module" src="../../public/js/questions/questions.js"></script>
+	
 	<script>
 		function goBack() {
 			window.location.href = "/";
@@ -30,7 +34,7 @@
 	<div class="card-container">
 
 		<div class="card category-any">
-			<div class="card-title">Any Category</div>
+			<div class="card-title">User's Questions</div>
 		</div>
 
 		<div class="card category-general">
@@ -79,6 +83,10 @@
 
 		<div class="card category-games">
 			<div class="card-title">Entertainment: Video Games</div>
+		</div>
+
+		<div class="card category-board-games">
+			<div class="card-title">Entertainment: Board Games</div>
 		</div>
 
 		<div class="card category-anime">
@@ -170,6 +178,19 @@
 		</div>
 
 	</div>
+
+
+	<!--Container for modal window -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="modal-close" class="close">X</span>
+            <h3>
+				<p id="modal-title"></p>
+			</h3>
+			<div id="modal-body"></div>
+        </div>
+    </div>
+
 
 </body>
 

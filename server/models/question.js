@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const questionSchema = new mongoose.Schema({
     type: String,
     difficulty: String,
-    question: String,
     category: String,
+    question: String,
     correctAnswer: String,
     incorrectAnswer: [String]
 });

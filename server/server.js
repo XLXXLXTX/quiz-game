@@ -11,6 +11,7 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const path = require('path');
 
 // import module for real time WebSockets
 const socketIo = require('socket.io');
@@ -23,6 +24,7 @@ const { connectDB } = require('./db');
 ////const userRoutes = require('./routes/userRoutes');
 const homeRoutes = require('./routes/homeRoutes');
 const apiRoutes = require('./routes/apiRoutes');
+const questionRoutes = require('./routes/questionRoutes');
 
 //--------------------------------------------------
 // SERVER CONFIG / INSTANCE SECTION
@@ -34,6 +36,8 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+//set js folder as static folder for js files
+app.use('/js', express.static(path.join(__dirname, 'public/js')));
 
 // allow cookie transfer to auth users
 const corsOptions = {
@@ -69,6 +73,9 @@ app.use('/', homeRoutes);
 
 // set default entry point for API
 app.use('/api', apiRoutes);
+
+// set default entry point for questions from the clientside
+app.use('/questions', questionRoutes);
 
 // config routes for the app, from the file userRoutes.js  
 //app.use('/api/users', userRoutes);
