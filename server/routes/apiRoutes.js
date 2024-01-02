@@ -10,8 +10,8 @@ const router = express.Router();
 
 // routes for API: check DB content without using web browser interface
 router.get('/users', userController.getAllUsers);
-router.get('/scores', scoreController.getTop)
-router.get('/questions', questionController.getAllQuestions)
+router.get('/scores', scoreController.getAllScores)
+router.get('/questionsdb', questionController.getAllQuestions)
 
 router.get('/decode-token', auth.decodeToken);
 

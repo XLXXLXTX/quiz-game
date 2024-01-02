@@ -2,19 +2,35 @@ const path = require('path');
 
 const Score = require('../models/score');
 
+
+const getAllScores = async (req, res) => {
+
+  try {
+
+    const scores = await Score.find()
+      .sort({ total: -1 }) // short in descendant order (max to min)
+
+    res.json(scores);
+
+  } catch (error) {
+    console.log('ERROR: Error in getAllScores():', error);
+    res.status(500).json({ error: 'Error while retrieving all scores' });
+  }
+};
+
 const getTop = async (req, res) => {
 
   try {
-    
+
     const topScores = await Score.find()
       .sort({ total: -1 }) // short in descendant order (max to min)
       .limit(10); // only retrieve top 10 scores from players
 
     res.json(topScores);
-      
+
   } catch (error) {
-        console.log('ERROR: Error in getTop():', error);
-        res.status(500).json({ error: 'Error while retrieving top scores' });
+    console.log('ERROR: Error in getTop():', error);
+    res.status(500).json({ error: 'Error while retrieving top scores' });
   }
 };
 
@@ -23,4 +39,4 @@ const showScoreboardPage = (req, res) => {
   res.sendFile(path.join(__dirname, '../views/scoreboard.html'))
 };
 
-module.exports = { getTop, showScoreboardPage};
+module.exports = { getAllScores, getTop, showScoreboardPage };
