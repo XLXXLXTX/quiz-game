@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Color Palette</title>
+	<style>
+
+		@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap');
+
+		body {
+			background-color: grey;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			margin: 0;
+			font-family: 'Lexend', sans-serif;
+		}
+
+		.color-palette {
+			display: flex;
+			gap: 10px;
+		}
+
+		.color-box {
+			border: 3px solid black;
+			width: 150px;
+			height: 150px;
+			border-radius: 8px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 18px;
+			color: #fff;
+		}
+
+		.color1 {
+			background-color: #121327;
+		}
+
+		.color2 {
+			background-color: #2a3965;
+		}
+
+		.color3 {
+			background-color: #6563b2;
+		}
+
+		.color4 {
+			background-color: #be97fa;
+		}
+
+		.color5 {
+			background-color: #ffd8f4;
+		}
+
+		.color4, .color5 {
+			color: #000;
+		}
+
+	</style>
+</head>
+
+<body>
+
+	<div class="color-palette">
+		<div class="color-box color1">Color 1: </div>
+		<div class="color-box color1"> #121327 </div>
+		<div class="color-box color2">Color 2:</div>
+		<div class="color-box color2"> #2a3965 </div>
+		<div class="color-box color3">Color 3:</div>
+		<div class="color-box color3">#6563b2 </div>
+		<div class="color-box color4">Color 4:</div>
+		<div class="color-box color4"> #be97fa </div>
+		<div class="color-box color5">Color 5: </div>
+		<div class="color-box color5">#ffd8f4 </div>
+	</div>
+
+</body>
+
+</html>
