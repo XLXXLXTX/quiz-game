@@ -1,4 +1,3 @@
-<!-- views/signup.html -->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,6 +7,14 @@
 	<title>QuizGame - Sign Up</title>
 
 	<link rel="stylesheet" href="../../public/css/login-signup.css">
+
+	<script>
+		
+		function redirect(page) {
+			window.location.href = page;
+		}
+
+	</script>
 
 </head>
 
@@ -30,6 +37,9 @@
 		<p>Already have an account? <a href="/login">Log in</a></p>
 
 	</div>
+
+	<button class="index-btn" onclick="redirect('/')">Go Back</button>
+
 </body>
 
 </html>

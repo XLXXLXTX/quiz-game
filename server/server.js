@@ -26,6 +26,7 @@ const homeRoutes = require('./routes/homeRoutes');
 const apiRoutes = require('./routes/apiRoutes');
 const questionRoutes = require('./routes/questionRoutes');
 const scoreRoutes = require('./routes/scoreRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 //--------------------------------------------------
 // SERVER CONFIG / INSTANCE SECTION
@@ -81,9 +82,8 @@ app.use('/questions', questionRoutes);
 // set default entry point for scores from the clientside
 app.use('/scoreboard', scoreRoutes);
 
-// config routes for the app, from the file userRoutes.js  
-//app.use('/api/users', userRoutes);
-
+// set default entry point for users from the clientside
+app.use('/users', userRoutes);
 
 //--------------------------------------------------
 // INIT SERVER SECTION

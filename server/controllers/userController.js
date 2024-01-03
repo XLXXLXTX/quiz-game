@@ -9,21 +9,35 @@ const User = require('../models/user');
 
 // function to retrieve all users from the DB
 const getAllUsers = async (req, res) => {
-  
+
   try {
-  
+
     const users = await User.find();
     res.json(users);
-  
+
   } catch (error) {
     console.log('ERROR: Error in getAllUsers():', error);
     res.status(500).json({ error: 'Error while retrieving users' });
   }
 };
 
+// function to retrieve one user from the DB given its id
+const findById = async (req, res) => {
+
+  try {
+
+    const user = await User.findOne({ "_id": req.params.id })
+    res.json(user);
+
+  } catch (error) {
+    console.log('ERROR: Error in findById():', error);
+    res.status(500).json({ error: 'Error while retrieving user' });
+  }
+}
+
 // function to register a new user in the application
 const signUp = async (req, res) => {
-  
+
   // console.log("req.body")
   // console.log(req.body)
   // destructuring from the req.body into vars
@@ -32,18 +46,18 @@ const signUp = async (req, res) => {
   try {
 
     // search username in DB to check if exists or not 
-    const user = await User.findOne( {username} );
+    const user = await User.findOne({ username });
 
     // if username exist, we can't permit that, username must be unique for each user
-    if (user){
-      return res.status(401).json( {message: 'Username is in use: please try again.'} );
+    if (user) {
+      return res.status(401).json({ message: 'Username is in use: please try again.' });
     }
 
     // hash password before storing it
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // if it's a new username, we are going to register it 
-    const newUser = new User( { "username": username, "password": hashedPassword} );
+    const newUser = new User({ "username": username, "password": hashedPassword });
     await newUser.save();
 
     // Generate JWT token
@@ -53,11 +67,18 @@ const signUp = async (req, res) => {
 
     console.log(`\t\tRegistered successfully: ${newUser.username} - ${password} - ${token}`)
 
-    res.cookie("token", token, { httpOnly: true }).redirect("/");   //.json( {message: 'New user registered.'} )
+    // create a cookie with token
+    // and redirect to home page
 
-  } catch (error){
-      console.log('ERROR: Error in signUp():', error);
-      res.json(500).json( {error: 'Internal error server'} )
+    // if we delete { httpOnly: true } we can access to the cookie from the client side
+    // as we save a cookie with an id, its not a problem to access to it from the client side
+    // and we set another cookie to avoid making a request to the server to get the username
+    // each time we want to show it in the navbar
+    return res.cookie("token", token).redirect("/")
+
+  } catch (error) {
+    console.log('ERROR: Error in signUp():', error);
+    res.json(500).json({ error: 'Internal error server' })
   }
 };
 
@@ -70,33 +91,37 @@ const logIn = async (req, res) => {
   try {
 
     // try to find one exact registry to make sure log in it's correct
-    const existingUser = await User.findOne( { "username" : username } )
+    const existingUser = await User.findOne({ "username": username })
 
     // if there isnt any coincidence, maybe typped wrong username or not registered
-    if(!existingUser){
-        return res.status(401).json( {message: 'Username not found: please try again.'})
+    if (!existingUser) {
+      return res.status(401).json({ message: 'Username not found: please try again.' })
     }
 
     // verify passwords are the same
     const passwordMatch = await bcrypt.compare(password, existingUser.password);
 
-    if(!passwordMatch){
-        return res.status(401).json( {message: 'Incorrect username or password: please try again.'})
+    if (!passwordMatch) {
+      return res.status(401).json({ message: 'Incorrect username or password: please try again.' })
     }
 
     // create jsw token 
     const token = await jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRATION,
     });
-    
+
     // create a cookie with token
     // and redirect to home page
-    return res.cookie("token", token, { httpOnly: true }).redirect("/") //json({ success: true, message: 'LoggedIn Successfully' });
-    //res.json( {message: 'Log in sucessfully'})
+
+    // if we delete { httpOnly: true } we can access to the cookie from the client side
+    // as we save a cookie with an id, its not a problem to access to it from the client side
+    // and we set another cookie to avoid making a request to the server to get the username
+    // each time we want to show it in the navbar
+    return res.cookie("token", token).redirect("/")
 
   } catch (error) {
     console.log('ERROR: Error in logIn()', error);
-    res.json(500).json( {error: 'Internal error server'} )
+    res.json(500).json({ error: 'Internal error server' })
   }
 
 };
@@ -114,9 +139,11 @@ const logIn = async (req, res) => {
 ////}
 
 // export this functions to call them from other files  
-module.exports = { getAllUsers,
-                   signUp,
-                   logIn
-                 };
+module.exports = {
+  getAllUsers,
+  findById,
+  signUp,
+  logIn
+};
 
 

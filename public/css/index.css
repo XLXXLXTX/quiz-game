@@ -1,54 +1,116 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap');
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #121327;
-    font-family: 'Lexend', sans-serif;
-    color: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	background-color: #121327;
+	font-family: 'Lexend', sans-serif;
+	color: #fff;
 }
 
 .center-div {
-    background-color: #fff;
-    margin: 20px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    min-width: 200px;
-    max-width: 80%;
-    white-space: nowrap;
-    overflow: hidden;
+	background-color: #fff;
+	margin: 20px;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	min-width: 200px;
+	max-width: 80%;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .div-option {
-    background-color: #6563b2;
-    border: 1px solid #2a3965;
+	background-color: #6563b2;
+	border: 1px solid #2a3965;
+}
+
+.div-option:hover {
+	background-color: #ffd8f4;
+	color: black;
+	cursor: pointer;
 }
 
 .center-div.div-option:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .login-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: inherit;
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	background-color: #3498db;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	font-family: inherit;
 }
 
 .login-btn:hover {
-    background-color: #2980b9;
-    cursor: pointer;
+	background-color: #2980b9;
+	cursor: pointer;
+}
+
+.user-info {
+	width: 60%;
+	min-width: 200px;
+	max-width: 80%;
+	position: fixed;
+	justify-content: center;
+	top: 20px;
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 28px;
+	font-family: inherit;
+	text-align: center;
+
+	/* avoid text overflow */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	/* if text overflow, show ..., if not show full text */
+}
+
+
+.user-info span {
+	color: #ffd8f4;
+	font-weight: bold;
+}
+
+.profile-btn-show {
+	display: block;
+}
+
+.profile-btn-hide {
+	display: none;
+}
+
+.profile-btn {
+
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	background-color: #be97fa;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	font-family: inherit;
+
+}
+
+.profile-btn:hover {
+	background-color: #a268fa;
+	cursor: pointer;
 }

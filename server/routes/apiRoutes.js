@@ -13,11 +13,7 @@ router.get('/users', userController.getAllUsers);
 router.get('/scores', scoreController.getAllScores)
 router.get('/questionsdb', questionController.getAllQuestions)
 
-router.get('/decode-token', auth.decodeToken);
-
-// --------------------------------------------------
-// FOR TESTING PURPOSES ONLY
-// --------------------------------------------------
+router.post('/decode-token', auth.decodeToken);
 
 const path = require('path');
 

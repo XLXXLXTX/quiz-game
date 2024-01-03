@@ -1,56 +1,89 @@
-/* TODO: create styles for the interface ... */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap');
 
-/* public/css/styles.css */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
-  .signup-container,
-  .login-container {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 300px;
-    text-align: center;
-  }
-  
-  h2 {
-    color: #333;
-  }
-  
-  .signup-form,
-  .login-form {
-    display: flex;
+	display: flex;
     flex-direction: column;
-    gap: 10px;
-  }
-  
-  .signup-form input,
-  .login-form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .signup-form button,
-  .login-form button {
-    background-color: #007bff;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #121327;
+    font-family: 'Lexend', sans-serif;
     color: #fff;
-    padding: 10px;
+}
+
+.signup-container,
+.login-container {
+	background-color: #6563b2;
+	border: 1px solid #2a3965;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	width: 300px;
+	text-align: center;
+}
+
+h2 {
+	color: #fff;
+}
+
+.signup-form,
+.login-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.signup-form input,
+.login-form input {
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.signup-form button,
+.login-form button {
+	background-color: #3498db;
+	color: #fff;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+    font-family: inherit;
+}
+
+.signup-form button:hover,
+.login-form button:hover {
+	background-color: #2980b9;
+}
+
+a {
+	text-transform: uppercase;
+	color: black;
+}
+
+a:visited {
+	
+	color: black;
+	text-decoration: none;
+}
+
+.index-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .signup-form button:hover,
-  .login-form button:hover {
-    background-color: #0056b3;
-  }
-  
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.index-btn:hover {
+    background-color: #2980b9;
+    cursor: pointer;
+}

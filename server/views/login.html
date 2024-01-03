@@ -8,6 +8,14 @@
 
 	<link rel="stylesheet" href="../../public/css/login-signup.css">
 
+	<script>
+		
+		function redirect(page) {
+			window.location.href = page;
+		}
+
+	</script>
+
 </head>
 
 <body>
@@ -15,8 +23,7 @@
 
 		<h2>Log In</h2>
 
-		<!-- form to send data through POST method to the specified route -->
-		<form class="login-form" action="/login" method="post">
+        <form class="login-form" action="/login" method="post"> 
 
 			<input type="text" name="username" placeholder="Username" required>
 			<input type="password" name="password" placeholder="Password" required>
@@ -29,6 +36,9 @@
 		<p>No account yet? <a href="/signup">Sign up</a></p>
 
 	</div>
+
+	<button class="index-btn" onclick="redirect('/')">Go Back</button>
+
 </body>
 
 </html>
