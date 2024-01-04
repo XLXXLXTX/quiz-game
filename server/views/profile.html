@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Quiz Game</title>
+	<link rel="stylesheet" href="../../public/css/profile.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+	<script>
+
+		function redirect(page) {
+			window.location.href = page;
+		}
+
+
+		// obtain 'token' from the cookie
+		function getCookie(name) {
+			const value = `; ${document.cookie}`;
+			const parts = value.split(`; ${name}=`);
+			if (parts.length === 2) return parts.pop().split(';').shift();
+		}
+
+		async function getProfileInfo() {
+			
+			const token = getCookie('token');
+			
+			if (!token) {
+				alert('Error: Invalid token');
+				throw new Error('Invalid token');
+			}
+
+			try {
+
+				let response = await axios.post('/api/decode-token', { token });
+
+				if (!response.data) {
+					alert('Error: Invalid token');
+					throw new Error('Invalid token');
+				}
+
+				const { id } = response.data;
+
+				response = await axios.post('/profile-info', { id })
+
+				console.log('response2: ', response);
+
+				if (!response.data) {
+					alert('Error: /profile-info');
+					throw new Error('Error: /profile-info');
+				}
+
+				const {username, score, questions} = response.data;
+
+				const userUsername = document.getElementById('user-username');
+				userUsername.innerHTML = username;
+
+				const { correctEasy, correctMedium, correctHard, total } = score;
+
+				const statsCorrectAnswers = document.getElementById('stats-correct-answers');
+				statsCorrectAnswers.innerHTML = correctEasy + correctMedium + correctHard;
+
+				const statsCorrectEasy = document.getElementById('stats-correct-easy');
+				statsCorrectEasy.innerHTML = correctEasy;
+
+				const statsCorrectMedium = document.getElementById('stats-correct-medium');
+				statsCorrectMedium.innerHTML = correctMedium;
+
+				const statsCorrectHard = document.getElementById('stats-correct-hard');
+				statsCorrectHard.innerHTML = correctHard;
+
+				const statsTotalPoints = document.getElementById('stats-total-points');
+				statsTotalPoints.innerHTML = total;
+
+				const tableQuestions = document.getElementById('table-questions');
+
+				questions.forEach(question => {
+					const { category, difficulty, question: questionText, correctAnswer } = question;
+
+					const tr = document.createElement('tr');
+
+					const tdCategory = document.createElement('td');
+					tdCategory.innerHTML = category;
+
+					const tdDifficulty = document.createElement('td');
+					tdDifficulty.innerHTML = difficulty;
+
+					const tdQuestion = document.createElement('td');
+					tdQuestion.innerHTML = questionText;
+
+					const tdAnswer = document.createElement('td');
+					tdAnswer.innerHTML = correctAnswer;
+
+					tr.appendChild(tdCategory);
+					tr.appendChild(tdDifficulty);
+					tr.appendChild(tdQuestion);
+					tr.appendChild(tdAnswer);
+
+					tableQuestions.appendChild(tr);
+				});
+
+			} catch (error) {
+				console.error('Error', error);
+			}
+
+		}
+
+		document.addEventListener('DOMContentLoaded', getProfileInfo());
+
+	</script>
+</head>
+
+<body>
+
+	<button class="back-btn" onclick="redirect('/')">Go Back</button>
+
+	<button class="logout-btn" onclick="alert('Doing Logout ...')">Log out</button>
+
+	<div class="header">
+		<span id="user-username" class="user-username"></span>'s Profile 
+	</div>
+
+	<div class="img-div">
+		<img class="img-profile" src="../../public/img/profile.jpg" alt="profile picture">
+	</div>
+
+
+	<div class="center-div stats-container">
+
+		<h2>Statistics:</h2>
+
+		<div class="stats">
+			<span class="stats-header"> Correct Answers:</span> <span id="stats-correct-answers" class="stats-content stats-correct-answers"></span>
+			<span class="stats-header"> Correct Easy:</span> <span id="stats-correct-easy" class="stats-content stats-correct-easy"></span>
+			<span class="stats-header"> Correct Medium:</span> <span id="stats-correct-medium" class="stats-content stats-correct-medium"></span>
+			<span class="stats-header"> Correct Hard:</span> <span id="stats-correct-hard" class="stats-content stats-correct-hard"></span>
+		</div>
+		
+		<div class="total-score-container">
+			<div class="total-score">
+				<div>
+					<span class="stats-header"> Total Points:</span> <span id="stats-total-points" class="stats-content stats-total-points"></span>
+				</div>
+			</div>
+
+		</div>
+		
+
+	</div>
+
+	<div class="center-div questions-container">
+
+		<h2>My Questions:</h2>
+
+		<div class="my-questions">
+
+			<table id="table-questions">
+
+				<tr>
+					<th>Category</th>
+					<th>Difficulty</th>
+					<th>Question</th>
+					<th>Answer</th>
+				</tr>
+
+				<!-- <tr>
+					<td>General Knowledge</td>
+					<td>hard</td>
+					<td>What is the capital city of Australia?</td>
+					<td>Canberra</td>
+				</tr>
+
+				<tr>
+					<td>General Knowledge</td>
+					<td>medium</td>
+					<td>The Eiffel Tower is located in London.</td>
+					<td>False</td>
+				</tr>
+
+				<tr>
+					<td>Art</td>
+					<td>hard</td>
+					<td>Who painted the Mona Lisa?</td>
+					<td>Leonardo da Vinci</td>
+				</tr>
+
+				<tr>
+					<td>Art</td>
+					<td>medium</td>
+					<td>Vincent van Gogh cut off his own ear.</td>
+					<td>True</td>
+				</tr>
+
+				<tr>
+					<td>Celebrities</td>
+					<td>medium</td>
+					<td>Which actor played the character Iron Man in the Marvel Cinematic Universe?</td>
+					<td>Robert Downey Jr.</td>
+				</tr>
+
+				<tr>
+					<td>Entertainment: Music</td>
+					<td>easy</td>
+					<td>Michael Jackson's album 'Thriller' is the best-selling album of all time.</td>
+					<td>True</td>
+				</tr>
+
+				<tr>
+					<td>Science: Computers</td>
+					<td>medium</td>
+					<td>What does CPU stand for?</td>
+					<td>Central Processing Unit</td>
+				</tr>
+
+				<tr>
+					<td>Science &amp; Nature</td>
+					<td>easy</td>
+					<td>Water boils at a lower temperature at higher altitudes.</td>
+					<td>True</td>
+				</tr>
+
+				<tr>
+					<td>Politics</td>
+					<td>hard</td>
+					<td>Who was the first President of the United States?</td>
+					<td>George Washington</td>
+				</tr>
+
+				<tr>
+					<td>History</td>
+					<td>medium</td>
+					<td>The Great Wall of China is the longest wall in the world.</td>
+					<td>False</td>
+				</tr> -->
+
+			</table>
+
+
+
+		</div>
+		<!-- <div class="question">1 - Easy - Geography - Greenland is larger than Africa.</div>
+		<div class="question">2 - Easy - Geography - Greenland is larger than Africa.</div>
+		<div class="question">3 - Easy - Geography - Greenland is larger than Africa.</div>
+		<div class="question">4 - Easy - Geography - Greenland is larger than Africa.</div>
+		<div class="question">5 - Easy - Geography - Greenland is larger than Africa.</div>
+		<div class="question">6 - Easy - Geography - Greenland is larger than Africa.</div>
+		<div class="question">7 - Easy - Geography - Greenland is larger than Africa.</div>
+		<div class="question">8 - Easy - Geography - Greenland is larger than Africa.</div>
+		<div class="question">9 - Easy - Geography - Greenland is larger than Africa.</div>
+		<div class="question">10 - Easy - Geography - Greenland is larger than Africa.</div>
+		<div class="question">11 - Easy - Geography - Greenland is larger than Africa.</div>
+		<div class="question">12 - Easy - Geography - Greenland is larger than Africa.</div>
+		<div class="question">13 - Easy - Geography - Greenland is larger than Africa.</div> -->
+
+
+
+	</div>
+
+
+
+</body>
+
+</html>

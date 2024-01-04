@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap');
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	background-color: #121327;
+	font-family: 'Lexend', sans-serif;
+	color: #fff;
+}
+
+.header {
+    color: #fff;
+    font-size: 28px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.user-username {
+    color: #ffd8f4;
+	font-weight: bold;
+}
+
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.back-btn:hover {
+    background-color: #2980b9;
+    cursor: pointer;
+}
+
+.logout-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.center-div {
+    text-align: left;
+
+    margin: 20px;
+    padding: 20px;
+    
+    min-width: 60%;
+    height: auto;
+    max-width: 80%;
+
+    white-space: nowrap;
+    background-color: white;
+    color: black;
+    border: 1px solid #2a3965;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.center-div.questions-container {
+    min-height: 40%;
+    max-height: none; /* Desactiva la altura máxima */
+    overflow: auto; /* Agrega una barra de desplazamiento si es necesario */
+}
+
+.center-div.stats-container {
+    
+    min-height: 18%;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.total-score-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.total-score {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    font-size: 22px;
+    color: #fff;
+    background-color: #6563b2;
+    border-radius: 8px;
+}
+
+.stats {
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stats-header {
+    text-transform: uppercase;
+    /* font-weight: 500; */
+    margin: 5px;
+}
+
+.stats-content {
+    color: black;
+	font-weight: bold;
+}
+
+.stats-total-points {
+    color: #fff;
+}
+
+.img-div {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 10px;
+    object-fit: cover;
+    border: 2px solid #fff;
+}
+
+.img-profile{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.my-questions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-shadow: 0 2px 15px rgba(64, 64, 64, .7);
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+}
+
+td,
+th {
+    padding: 15px 20px;
+    text-align: center;
+    max-width: 200px;
+    word-wrap: break-word; /* break long words */   
+    overflow-wrap: break-word; /* break words on any character */
+    /* overflow: hidden; */
+    white-space: normal;
+}
+
+th {
+    background-color: #6563b2;
+    color: #121327;
+    font-family: 'Lexend', Sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+tr {
+    color: #121327;
+    width: 100%;
+    background-color: #fafafa;
+    font-family: 'Lexend', sans-serif;
+}
+
+tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+@media screen and (max-width: 768px) {
+    .center-div.stats-container {
+        display: flex;
+        flex-direction: column; /* change direction to column */
+        align-items: center; /* center items on the x axis */
+        text-align: center; /* center text */
+    }
+
+    .stats {
+        flex-direction: column; /* change direction to column */
+        text-align: center; /* center text */
+    }
+}

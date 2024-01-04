@@ -70,7 +70,7 @@ const decodeToken = async (req, res) => {
 
         //res.cookie('usernameCookie', username);
 
-        res.json({ username });
+        res.json({ id, username });
 
     } catch (error) {
         console.error('Error decoding token:', error);
