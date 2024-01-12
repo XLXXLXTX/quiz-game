@@ -35,4 +35,82 @@ const getUrlTriviaApi = () => {
     return process.env.URL_TRIVIA_API;
 }
 
-module.exports = { createUrlApi, getTokenTriviaApi, getUrlTriviaApi };
+const getUrlResetTokenTriviaApi = () => {
+    return process.env.URL_RESET_TOKEN;
+}
+
+const getUrlNewTokenTriviaApi = () => {
+    return process.env.URL_NEW_TOKEN;
+
+}
+
+const requestNewToken = async () => { 
+    const url = getUrlNewTokenTriviaApi();
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        //throw new Error(`HTTP error! Status: ${response.status}\n${response}`);
+        console.log(`HTTP error! Status: ${response.status}\n${response}`);
+        return false;
+    }
+
+    const data = await response.json();
+
+    if (data.response_code === 0) {
+        console.log('✅ New token acquired!');
+        console.log('⌛ Saving new token ...');
+        // save new token in .env file
+        const fs = require('fs');
+        const dotenv = require('dotenv');
+        dotenv.config();
+
+        const envConfig = dotenv.parse(fs.readFileSync('.env'));
+        envConfig.TOKEN_TRIVIA_API = data.token;
+
+        const envConfigString = Object.keys(envConfig).map(key => `${key}=${envConfig[key]}`).join('\n');
+
+        fs.writeFileSync('.env', envConfigString);
+
+        console.log('✅ New token saved!');
+
+        dotenv.config();
+    }
+}
+
+const resetTokenTriviaApi = async () => {
+
+    // example Url to reset token
+    // https://opentdb.com/api_token.php?command=reset&token=YOURTOKENHERE
+
+    const urlreset = getUrlResetTokenTriviaApi();
+    const token = getTokenTriviaApi();
+
+    let url = `${urlreset}${token}`;
+    console.log('url:', url);
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        //throw new Error(`HTTP error! Status: ${response.status}\n${response}`);
+        console.log(`HTTP error! Status: ${response.status}\n${response}`);
+        return false;
+    }
+
+    const data = await response.json();
+
+    if (data.response_code === 0) {
+        console.log('✅ Token reseted!');
+    }else{
+        console.log('❌ Token not reseted!');
+        console.log('⌛ Requesting new token ...');
+
+        requestNewToken();
+    }
+
+    //console.log('data:', data);
+
+    return true;
+
+}
+
+module.exports = { createUrlApi, getTokenTriviaApi, getUrlTriviaApi, getUrlResetTokenTriviaApi, resetTokenTriviaApi };

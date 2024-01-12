@@ -28,6 +28,9 @@ const questionRoutes = require('./routes/questionRoutes');
 const scoreRoutes = require('./routes/scoreRoutes');
 const userRoutes = require('./routes/userRoutes');
 
+//API and token related imports
+const { resetTokenTriviaApi } = require('./utils/urlApiUtils');
+
 //--------------------------------------------------
 // SERVER CONFIG / INSTANCE SECTION
 //--------------------------------------------------
@@ -43,8 +46,8 @@ app.use('/js', express.static(path.join(__dirname, 'public/js')));
 
 // allow cookie transfer to auth users
 const corsOptions = {
-  origin: ['http://localhost'],
-  credentials: true,
+	origin: ['http://localhost'],
+	credentials: true,
 };
 
 app.use(cors(corsOptions));
@@ -94,5 +97,7 @@ const PORT = process.env.PORT || 3000;
 
 // start server to listen connections on designed port 
 server.listen(PORT, () => {
-  console.log(`✅ Server innitiated in port ${PORT}`);
+	resetTokenTriviaApi();
+
+	console.log(`✅ Server innitiated in port ${PORT}`);
 });

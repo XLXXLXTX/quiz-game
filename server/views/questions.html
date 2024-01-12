@@ -11,15 +11,157 @@
 
 	<script type="module" src="../../public/js/questions/questions.js"></script>
 	
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 	<script>
 		function goBack() {
 			window.location.href = "/";
+		}
+
+		function getCookie(name) {
+			const value = `; ${document.cookie}`;
+			const parts = value.split(`; ${name}=`);
+			if (parts.length === 2) return parts.pop().split(';').shift();
+		}
+
+		function checkFields(category, difficulty, type, question, correctAnswer, incorrectAnswer1, incorrectAnswer2, incorrectAnswer3){
+
+			
+			if (!category.trim() || !difficulty.trim() || !type.trim() || !question.trim()) {
+				alert('Please provide values for category, difficulty, type and question.');
+				console.log('Please provide values for category, difficulty, type and question.')
+				return false; // Detener el proceso si no hay respuesta correcta
+			}
+
+			// Verificar el tipo de pregunta
+			if (type === 'boolean') {
+				// Verificar que se haya proporcionado un valor para la respuesta correcta
+				if (!correctAnswer.trim() || //check if there is a correct answer and an incorrect answer
+				   (correctAnswer.trim().toLowerCase() !== 'true' && correctAnswer.trim().toLowerCase() !== 'false') ) { //check if the correct answer is true or false
+
+					console.log(correctAnswer.trim().toLowerCase());
+					
+					alert('Please provide a value for the correct answer for the True/False question.');
+					console.log('Please provide a value for the correct answer for the True/False question')
+					return false; // Detener el proceso si no hay respuesta correcta
+				}
+
+				// No se requieren respuestas incorrectas para preguntas de Verdadero/Falso
+			} else if (type === 'multiple') {
+				// Verificar que se hayan proporcionado valores para todas las respuestas
+				if (!correctAnswer.trim() || !incorrectAnswer1.trim() || !incorrectAnswer2.trim() || !incorrectAnswer3.trim()) {
+					alert('Please provide values for all answers for the Multiple Choice question.');
+					console.log('Please provide values for all answers for the Multiple Choice question.')
+					return false; // Detener el proceso si falta alguna respuesta
+				}
+			} else {
+				// Tipo de pregunta no reconocido
+				alert('Please select a valid question type.');
+				console.log('Please select a valid question type.')
+				return false;
+			}
+			
+			return true
+		}
+
+		function createQuestion(category, difficulty, type, question, correctAnswer, incorrectAnswer1, incorrectAnswer2, incorrectAnswer3){
+			question ={
+				category: category,
+				difficulty: difficulty,
+				type: type,
+				question: question,
+				correctAnswer: correctAnswer,
+			}
+
+			if(type === 'boolean'){
+				question.incorrectAnswers = [];
+			}else{
+				question.incorrectAnswers = [incorrectAnswer1, incorrectAnswer2, incorrectAnswer3];
+			}
+
+			return question;
+		}
+
+		async function submitNewQuestion() {
+			alert('submitNewQuestion');
+			const category = document.getElementById('question-category').value;
+			const difficulty = document.getElementById('question-difficulty').value;
+			const type = document.getElementById('question-type').value;
+			const question = document.getElementById('question-text').value;
+			const correctAnswer = document.getElementById('question-correct-answer').value;
+			
+			const incorrectAnswer1 = document.getElementById('question-incorrect-answer-1').value;
+			const incorrectAnswer2 = document.getElementById('question-incorrect-answer-2').value;
+			const incorrectAnswer3 = document.getElementById('question-incorrect-answer-3').value;
+
+			if(!checkFields(category, difficulty, type, question, correctAnswer, incorrectAnswer1, incorrectAnswer2, incorrectAnswer3))
+				return
+
+			const data = createQuestion(category, difficulty, type, question, correctAnswer, incorrectAnswer1, incorrectAnswer2, incorrectAnswer3);
+
+			//console.log('data:', data);
+			
+			const token = getCookie('token');
+
+			if (!token) {
+				alert('Error: Invalid token');
+				throw new Error('Invalid token');
+			}
+
+			try {
+
+				let response = await axios.post('/api/decode-token', { token });
+
+				if (!response.data) {
+					alert('Error: Invalid token');
+					throw new Error('Invalid token');
+				}
+
+				const { id, username } = response.data;
+				
+				
+				data.username = username;
+
+				response = await axios.post('/questions/addquestion', data);
+
+				console.log('response:', response);
+
+				if (response.data.success) {
+					alert('Question added successfully');
+				} else {
+					alert('Question not added');
+				}
+
+				
+			
+			} catch (error) {
+				console.error('Error decoding token:', error);
+			}
+
+			
+		}
+
+		function populateSelect(elementId, data) {
+			//alert('populateSelect');
+			console.log('data:', data);
+
+			const selectElement = document.getElementById(elementId);
+			console.log('selectElement:', selectElement);
+
+			for (const [key, value] of Object.entries(data)) {
+				const option = document.createElement('option');
+				option.value = value;
+				option.text = key; // Usa la clave como texto de la opción
+				selectElement.appendChild(option);
+			}
 		}
 	</script>
 
 </head>
 
 <body>
+
+	<button id="add-question-btn" class="add-question-btn add-question-btn-hide">Add a Question</button>
 
 	<button class="back-button" onclick="goBack()">Go Back</button>
 
@@ -182,7 +324,7 @@
 
 	<!--Container for modal window -->
     <div id="modal" class="modal">
-        <div class="modal-content">
+        <div id="modal-content" class="modal-content">
             <span id="modal-close" class="close">X</span>
             <h3>
 				<p id="modal-title"></p>

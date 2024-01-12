@@ -1,47 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap');
 
 body {
-    display: flex;
-    /*flex-direction: column;*/
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #121327;
-    font-family: 'Lexend', sans-serif;
-    color: #fff;
+	display: flex;
+	/*flex-direction: column;*/
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	margin: 0;
+	background-color: #121327;
+	font-family: 'Lexend', sans-serif;
+	color: #fff;
 }
 
 .header {
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    width: 100%;
-    box-sizing: border-box;
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 .center-div {
-    text-align: center;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+	text-align: center;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px;
 }
 
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    /*margin-top: 125%;*/ /* testing */
-    margin-top: 15%;
-    margin-bottom: 25px;
-    padding: 12px;
-    border-radius: 12px 12px 0 0;
 
-    box-shadow: 0 2px 15px rgba(64, 64, 64, .7);
-    
+table {
+	width: 100%;
+	border-collapse: collapse;
+	/*margin-top: 125%;*/
+	/* testing */
+	margin-top: 15%;
+	margin-bottom: 25px;
+	padding: 12px;
+	border-radius: 12px 12px 0 0;
+
+	box-shadow: 0 2px 15px rgba(64, 64, 64, .7);
+
 }
 
 /* .table-questions-users {
@@ -57,225 +59,300 @@ table {
 
 td,
 th {
-    padding: 15px 20px;
-    text-align: center;
-    text-align: left;
+	padding: 15px 20px;
+	text-align: center;
+	text-align: left;
 }
 
 th {
-    background-color: #6563b2;
-    color: black;
-    font-family: 'Lexend', Sans-serif;
-    font-weight: 300;
-    text-transform: uppercase;
-    text-align: center;
+	background-color: #6563b2;
+	color: black;
+	font-family: 'Lexend', Sans-serif;
+	font-weight: 300;
+	text-transform: uppercase;
+	text-align: center;
 }
 
 tr {
-    color: black;
-    width: 100%;
-    background-color: #fafafa;
-    font-family: 'Lexend', sans-serif;
+	color: black;
+	width: 100%;
+	background-color: #fafafa;
+	font-family: 'Lexend', sans-serif;
 }
 
 tr:nth-child(even) {
-    background-color: #eeeeee;
+	background-color: #eeeeee;
 }
 
 .back-button {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: inherit;
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	background-color: #3498db;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	font-family: inherit;
 }
 
 .back-button:hover {
-    background-color: #2980b9;
-    cursor: pointer;
+	background-color: #2980b9;
+	cursor: pointer;
+}
+
+.add-question-btn {
+
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	background-color: #be97fa;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	font-family: inherit;
+
 }
 
 /*---CARDS CSS---*/
 
 .card-container {
-    max-width: 1500px;
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+	max-width: 1500px;
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .card {
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    overflow: hidden;
-    width: calc(14.28% - 20px);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    height: 150px;
-    transition: transform 0.2s ease-in-out;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin: 10px;
+	overflow: hidden;
+	width: calc(14.28% - 20px);
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	box-sizing: border-box;
+	height: 150px;
+	transition: transform 0.2s ease-in-out;
 }
 
 /* Media query for smaller screens */
 @media (max-width: 1200px) {
-    .card {
-        width: calc(33.3% - 20px);
-        /* In smaller screen 2 cards in each row*/
-    }
+	.card {
+		width: calc(33.3% - 20px);
+		/* In smaller screen 2 cards in each row*/
+	}
 }
 
 /* Media query for bigger screens*/
 @media (min-width: 1201px) {
-    .card {
-        width: calc(14, 28% - 20px);
-        /* In bigger screens 5 cards in each row*/
-    }
+	.card {
+		width: calc(14, 28% - 20px);
+		/* In bigger screens 5 cards in each row*/
+	}
 }
 
 .card-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
 }
 
 .card-row h2 {
-    font-size: 24px;
-    color: #fff;
-    margin: 0;
+	font-size: 24px;
+	color: #fff;
+	margin: 0;
 }
 
 .card-title {
-    color: #fff;
-    padding: 10px;
-    font-size: 18px;
-    margin: 0;
+	color: #fff;
+	padding: 10px;
+	font-size: 18px;
+	margin: 0;
 }
 
 .card-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
 }
 
 .card:hover {
-    cursor: pointer;
-    transform: scale(1.05);
-    border: 5px solid white;
+	cursor: pointer;
+	transform: scale(1.05);
+	border: 5px solid white;
 }
 
 .category-any {
-    background-color: #3498db;
+	background-color: #3498db;
 }
 
 .category-general {
-    background-color: #5dade2;
+	background-color: #5dade2;
 }
 
 .category-books {
-    background-color: #85c1e9;
+	background-color: #85c1e9;
 }
 
 .category-film {
-    background-color: #aed6f1;
+	background-color: #aed6f1;
 }
 
 .category-music {
-    background-color: #2ecc71;
+	background-color: #2ecc71;
 }
 
 .category-theatres {
-    background-color: #58d68d;
+	background-color: #58d68d;
 }
 
 .category-television {
-    background-color: #82e0aa;
+	background-color: #82e0aa;
 }
 
 .category-comics {
-    background-color: #abebc6;
+	background-color: #abebc6;
 }
 
 .category-games {
-    background-color: #f39c12;
+	background-color: #f39c12;
 }
 
 .category-board-games {
-    background-color: #1ffc17;
+	background-color: #1ffc17;
 }
 
 .category-anime {
-    background-color: #f5b041;
+	background-color: #f5b041;
 }
 
 .category-animations {
-    background-color: #f8c471;
+	background-color: #f8c471;
 }
 
 .category-nature {
-    background-color: #fad7a0;
+	background-color: #fad7a0;
 }
 
 .category-computers {
-    background-color: #e74c3c;
+	background-color: #e74c3c;
 }
 
 .category-gadgets {
-    background-color: #ec7063;
+	background-color: #ec7063;
 }
 
 .category-mathematics {
-    background-color: #f1948a;
+	background-color: #f1948a;
 }
 
 .category-mythology {
-    background-color: #f5b7b1;
+	background-color: #f5b7b1;
 }
 
 .category-sports {
-    background-color: #1abc9c;
+	background-color: #1abc9c;
 }
 
 .category-geography {
-    background-color: #e67e22;
+	background-color: #e67e22;
 }
 
 .category-history {
-    background-color: #2c3e50;
+	background-color: #2c3e50;
 }
 
 .category-politics {
-    background-color: #3498db;
+	background-color: #3498db;
 }
 
 .category-art {
-    background-color: #27ae60;
+	background-color: #27ae60;
 }
 
 .category-celebrities {
-    background-color: #e74c3c;
+	background-color: #e74c3c;
 }
 
 .category-animals {
-    background-color: #3498db;
+	background-color: #3498db;
 }
 
 .category-vehicles {
-    background-color: #f39c12;
+	background-color: #f39c12;
+}
+
+/***/
+
+.add-question-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/* Reduzco el margen inferior para reducir el espacio entre los contenedores */
+}
+
+.add-question-select,
+.add-question-label,
+.add-question-submit,
+.add-question-input {
+	width: 80%;
+	padding: 8px;
+	margin-bottom: 2px;
+	box-sizing: border-box;
+	font-size: 16px;
+}
+
+.add-question-label {
+	margin-right: 5px;
+}
+
+.add-question-select {
+	width: auto;
+	max-width: 100%;
+}
+
+
+.add-question-submit {
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	padding: 12px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.add-question-submit:hover {
+	background-color: #45a049;
+}
+
+.add-question-btn-show {
+	display: block;
+}
+
+.add-question-btn-hide {
+	display: none;
 }

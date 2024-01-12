@@ -7,7 +7,8 @@ const questionSchema = new mongoose.Schema({
     category: String,
     question: String,
     correctAnswer: String,
-    incorrectAnswer: [String]
+    incorrectAnswer: [String],
+    createdBy: String
 });
 
 const Question = mongoose.model('Question', questionSchema);

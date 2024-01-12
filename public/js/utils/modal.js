@@ -3,12 +3,25 @@ let modalObj = document.getElementById('modal');
 let closeModalBtn = modalObj.querySelector('#modal-close');
 let modalTitle = modalObj.querySelector('#modal-title');
 let modalBody = modalObj.querySelector('#modal-body');
+let modalWindow = modalObj.querySelector('#modal-content');
 
-
-function initializeModal(title, body) {
+function initializeModal(title, body, sizew, sizeh) {
 
     modalTitle.textContent = title;
     modalBody.innerHTML = body;
+
+    if (!modalWindow) {
+        alert('!modalWindow');
+    }
+
+
+    if (sizew !== undefined) {
+        modalWindow.style.width = sizew;
+    }
+
+    if (sizeh !== undefined) {
+        modalWindow.style.height = sizeh;
+    }
 
     showModal();
 }
