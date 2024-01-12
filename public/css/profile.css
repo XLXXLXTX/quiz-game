@@ -59,6 +59,12 @@ body {
     font-family: inherit;
 }
 
+
+.logout-btn:hover {
+    background-color: #2980b9;
+    cursor: pointer;
+}
+
 .center-div {
     text-align: left;
 
