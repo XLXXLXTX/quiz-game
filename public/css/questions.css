@@ -309,6 +309,14 @@ tr:nth-child(even) {
 	/* Reduzco el margen inferior para reducir el espacio entre los contenedores */
 }
 
+.add-question-options-container {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+
 .add-question-select,
 .add-question-label,
 .add-question-submit,
@@ -324,11 +332,36 @@ tr:nth-child(even) {
 	margin-right: 5px;
 }
 
-.add-question-select {
+/* Estilos generales para el select */
+select {
 	width: auto;
 	max-width: 100%;
+    font-family: 'Lexend', sans-serif;
+    font-size: 14px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
 }
 
+/* Estilo al pasar el ratón sobre el select */
+select:hover {
+    border-color: #333;
+}
+
+/* Estilo cuando el select está enfocado */
+select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo para las opciones dentro del select */
+select option {
+    font-family: 'Lexend', sans-serif;
+    font-size: 14px;
+}
 
 .add-question-submit {
 	background-color: #4caf50;

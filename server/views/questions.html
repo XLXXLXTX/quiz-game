@@ -142,19 +142,23 @@
 		}
 
 		function populateSelect(elementId, data) {
-			//alert('populateSelect');
-			console.log('data:', data);
+
+			console.log('populateSelect:', elementId, data);
 
 			const selectElement = document.getElementById(elementId);
-			console.log('selectElement:', selectElement);
 
-			for (const [key, value] of Object.entries(data)) {
+			// Limpiar el select antes de agregar nuevas opciones
+			selectElement.innerHTML = '';
+
+			// Agregar las opciones de la API
+			for (const category of data) {
 				const option = document.createElement('option');
-				option.value = value;
-				option.text = key; // Usa la clave como texto de la opción
+				option.value = category.value;
+				option.text = category.name;
 				selectElement.appendChild(option);
 			}
 		}
+
 	</script>
 
 </head>

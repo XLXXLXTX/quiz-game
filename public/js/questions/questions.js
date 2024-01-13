@@ -193,25 +193,34 @@ document.addEventListener('DOMContentLoaded', () => {
 		//alert('Edit Profile');
 
 		let tmp = `
-		<div class="add-question-container">
-			<label class="add-question-label" for="question-category">Category:</label>
-			<select class="add-question-select" id="question-category">
-			<option value=''>Choose a category </option>
-			</select>
+
+		<div  class="add-question-options-container">
+
+			<div class="add-question-container">
+				<label class="add-question-label" for="question-category">Category:</label>
+				<select class="add-question-select" id="question-category">
+				<option value=''>Choose a category </option>
+				</select>
+			</div>
+
 		</div>
 		
-		<div class="add-question-container">
-			<label class="add-question-label" for="question-difficulty">Difficulty:</label>
-			<select class="add-question-select" id="question-difficulty">
-			<option value=''>Choose a difficulty</option>
-			</select>
-		</div>
+		<div  class="add-question-options-container">
 		
-		<div class="add-question-container">
-			<label class="add-question-label" for="question-type">Type:</label>
-			<select class="add-question-select" id="question-type">
-			<option value=''>Choose a Type</option>
-			</select>
+			<div class="add-question-container">
+				<label class="add-question-label" for="question-difficulty">Difficulty:</label>
+				<select class="add-question-select" id="question-difficulty">
+				<option value=''>Choose a difficulty</option>
+				</select>
+			</div>
+			
+			<div class="add-question-container">
+				<label class="add-question-label" for="question-type">Type:</label>
+				<select class="add-question-select" id="question-type">
+				<option value=''>Choose a Type</option>
+				</select>
+			</div>
+
 		</div>
 
 		<label class="add-question-label" for="question-text">Question:</label>
@@ -227,8 +236,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		<label class="add-question-label" for="question-incorrect-answer-3">Incorrect answer 3:</label>
 		<input class="add-question-input" type="text" id="question-incorrect-answer-3">
 
-
-
 		<button class="add-question-submit" onclick="submitNewQuestion()">Add Question</button>
 		`;
 
@@ -239,9 +246,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		console.log('c:', c)
 
-		const categories = c.map(category => category.name);
-		const difficulties = {'Easy':'easy', 'Medium': 'medium', 'Hard': 'hard'};
-		const types = {'Multiple choice': 'multiple', 'True/False' : 'boolean'}
+		const categories = c.map(category => ({
+			name: category.categoryName,
+			value: category.categoryValue
+		}));
+		const difficulties = [{ name: 'Easy', value: 'easy'}, {name: 'Medium', value:'medium'}, {name: 'Hard', value: 'hard'}];
+		const types = [{name:'Multiple choice', value: 'multiple'}, {name:'True/False', value: 'boolean'}];
 
 		populateSelect('question-category', categories);
 		populateSelect('question-difficulty', difficulties);
