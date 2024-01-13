@@ -4,6 +4,71 @@ const Question = require('../models/question');
 const Category = require('../models/category');
 const { createUrlApi, resetTokenTriviaApi } = require('../utils/urlApiUtils');
 const { stringify } = require('querystring');
+const { create } = require('../models/user');
+
+
+const createQuiz = async (req, res) => {
+	console.log('createQuiz()');
+
+	//const { token } = req.body;
+
+	let { category, difficulty, type } = req.body;
+	let options = {};
+
+	const conditions = [
+		{ condition: category != -1, key: 'category' },
+		{ condition: difficulty !== '', key: 'difficulty' },
+		{ condition: type !== '', key: 'type' }
+	];
+	
+	conditions.forEach(({ condition, key }) => {
+		if (condition) {
+			options[key] = req.body[key];
+		}
+	});
+
+	options.amount = 10;
+
+	//console.log('req.body:', req.body);
+
+	const url = await createUrlApi(options, false);
+	console.log('createQuiz ->url:', url);
+
+	let response = await fetch(url);
+
+	if (!response.ok) {
+		//throw new Error(`HTTP error! Status: ${response.status}\n${response}`);
+		console.log(`HTTP error! Status: ${response.status}\n${response}`);
+		return {}
+	}
+
+	let data = await response.json();
+
+	if (data.response_code !== 0) {
+		//throw new Error(`API error! Response code: ${data.response_code}\n${data}`);
+		console.log(`API error! Response code: ${data.response_code}\n${data}`);
+	}
+
+	let questionsRaw = data.results;
+
+	const questions = questionsRaw.map(question => {
+		return {
+			question: question.question,
+			answers: [question.correct_answer, ...question.incorrect_answers].sort(() => Math.random() - 0.5),
+			correctAnswer: question.correct_answer,
+		}
+	});
+
+	console.log('createQuiz -> questions:', questions);
+
+	if(questions.length === 0){
+		return res.json({error: 'No questions found'});
+	}
+
+	return res.json(questions);
+}
+
+
 
 const getCategories = async (req, res) => {
 	try {
@@ -108,8 +173,8 @@ const getQuestionsByCategory = async (req, res) => {
 
 	// category is the only thing that is recived from questions.html
 	// when clicking a card, the others are set by default HERE
-	const url = await createUrlApi({ amount: 10, category: req.params.category }); //, type: 'multiple', difficulty: 'easy' });
-	console.log('url:', url);
+	const url = await createUrlApi({ amount: 10, category: req.params.category }, true); //, type: 'multiple', difficulty: 'easy' });
+	console.log('getQuestionsByCategory() ->url:', url);
 
 	let response = await fetch(url);
 
@@ -174,5 +239,6 @@ module.exports = {
 	getQuestionsDbByCategory,
 	getQuestionsByCategory,
 	addQuestion,
-	getCategories
+	getCategories,
+	createQuiz
 };

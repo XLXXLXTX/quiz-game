@@ -13,6 +13,9 @@ router.get('/users', userController.getAllUsers);
 router.get('/scores', scoreController.getAllScores)
 router.get('/questionsdb', questionController.getAllQuestions)
 
+// route to get questions from Trivia API
+router.post('/create-quiz', questionController.createQuiz);
+
 router.post('/decode-token', auth.decodeToken);
 
 const path = require('path');

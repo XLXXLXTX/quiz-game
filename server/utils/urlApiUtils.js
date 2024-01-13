@@ -1,5 +1,5 @@
 
-const createUrlApi = async (params) => {
+const createUrlApi = async (params, useToken) => {
 
     // function to create an url like in this example
     // https://opentdb.com/api.php?amount=10&category=27&difficulty=easy&type=multiple
@@ -8,11 +8,21 @@ const createUrlApi = async (params) => {
     const tokenApi = getTokenTriviaApi();
     let paramsApi = params;
 
-    let url = `${urlApi}?token=${tokenApi}`;
+    let url = ''
+    if (useToken) {
+        url = `${urlApi}?token=${tokenApi}`;
+    }else{
+        url = `${urlApi}`;
+    }
+    
 
     if (paramsApi) {
         paramsApi = Object.keys(paramsApi).map(key => `${key}=${paramsApi[key]}`).join('&');
-        url = `${url}&${paramsApi}`;
+        if (!useToken) {
+            url = `${url}?${paramsApi}`;
+        }else{
+            url = `${url}&${paramsApi}`;
+        }
     }
 
     return url;

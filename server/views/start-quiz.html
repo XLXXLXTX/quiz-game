@@ -8,13 +8,105 @@
 
 	<link rel="stylesheet" href="../../public/css/start-quiz.css">
 
+	<script type="module" src="../../public/js/start-quiz/start-quiz.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+	<script>
+		function goBack() {
+			window.location.href = "/";
+		}
+	</script>
+
 </head>
 
 <body>
 
-	<div class="quiz-container">
-		<h1>Starting Quiz</h1>
+	<button class="back-button" onclick="goBack()">Go Back</button>
+	
+	<div class="header">
+		<h1>Start a Quiz</h1>
 	</div>
+
+	<div id="quiz-container" class="quiz-container">
+
+
+		<div id="quiz-options" class="quiz-options">
+			
+			<span class="quiz-options-text">
+				<p>First of all select the category, difficulty and type of questions you want to answer, and then click on the "Start Quiz Game" button.</p>
+				<p>With the information you provide, the game will generate a series of questions for you to answer.</p>
+				<p>Remenber that you can only answer 10 questions per game, and each difficulty has a different score.</p>
+				
+			</span>
+
+			<div class="quiz-options-container">
+
+				<div class="quiz-option">
+					<label for="category">Category:</label>
+					<select name="category" id="category">
+					</select>
+				</div>
+
+				<div class="quiz-option">
+					<label for="difficulty">Difficulty:</label>
+					<select name="difficulty" id="difficulty">
+						<!--<option value="" selected>Any difficulty</option>-->
+						<option value="easy">Easy</option>
+						<option value="medium">Medium</option>
+						<option value="hard">Hard</option>
+					</select>
+				</div>
+
+				<div class="quiz-option">
+					<label for="type">Type:</label>
+					<select name="type" id="type">
+						<option value="" selected>Any Type</option>
+						<option value="multiple">Multiple Choice</option>
+						<option value="boolean">True / False</option>
+					</select>
+				</div>
+
+			</div>
+
+			<button id="start-quiz-btn" class="start-quiz-btn" >Start Quiz Game</button>
+
+		</div>
+
+		<div id="question-container" class="question-container hidden">
+			<p id="question-text" class="question-text"></p>
+			<div id="answers-container" class="answers-container">
+				
+			</div>
+			<!--<button id="next-question-btn" class="next-question-btn">Next Question</button>-->
+		</div>
+		
+		<div id="results-container" class="results-container hidden">
+			<p id="results-text" class="results-text"></p>
+			<button id="play-again-btn" class="play-again-btn">Play Again</button>
+		</div>
+
+		<!--
+		<div id="question-container" class="question-container hidden">
+			<p id="question-text">Which planet is known as the Red Planet?</p>
+			<div id="answers-container" class="answers-container">
+				
+				<div class="question-answers">
+					<button class="answer-1-btn">Mars</button>
+					<button class="answer-2-btn">Jupiter</button>
+				</div>
+
+				<div class="question-answers">
+					<button class="answer-3-btn">Earth</button>
+					<button class="answer-4-btn">Venus</button>
+				</div>
+			</div>
+			<button id="next-question-btn" class="next-question-btn">Next Question</button>
+		</div>
+		-->
+	</div>
+
+
 
 </body>
 
