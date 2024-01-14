@@ -1,8 +1,7 @@
-/*define methods (for user objects) to access db */
+/* JS file to do the logic of the routes related to the users and the authentication */
 
 // lib to hash user's passwords to store them encrypted, increasing security
 const bcrypt = require('bcrypt')
-const path = require('path');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
@@ -10,12 +9,16 @@ const Score = require('../models/score');
 const Questions = require('../models/question');
 
 
-// function to retrieve all users from the DB
+/**
+ * Function that receive a GET REQUEST and
+ * returns all the users from the DB.
+ */
 const getAllUsers = async (req, res) => {
 
 	try {
 
-		const users = await User.find();
+		// only retrieve username from DB, not password or id fields
+		const users = await User.find({}, { _id: 0, username: 1, password: 0});
 		res.json(users);
 
 	} catch (error) {
@@ -24,7 +27,10 @@ const getAllUsers = async (req, res) => {
 	}
 };
 
-// function to retrieve one user from the DB given its id
+/**
+ * Function that receive a GET REQUEST and
+ * returns one user from the DB given its id.
+ */
 const findById = async (req, res) => {
 
 	try {
@@ -38,8 +44,11 @@ const findById = async (req, res) => {
 	}
 };
 
-// function to retrieve data from the user logged in
-// to show it in the profile page
+/**
+ * Function that receive a POST REQUEST and
+ * returns the user info from the DB given its id.
+ * (used in the profile page)
+ */
 const getUserInfo = async (req, res) => {
 
 	try {
@@ -72,7 +81,11 @@ const getUserInfo = async (req, res) => {
 
 };
 
-// function to register a new user in the application
+/**
+ * Function that receive a POST REQUEST and
+ * register a new user in the DB.
+ * (used in the signup page)
+ */
 const signUp = async (req, res) => {
 
 	// console.log("req.body")
@@ -119,7 +132,11 @@ const signUp = async (req, res) => {
 	}
 };
 
-// function to log in an existing user
+/**
+ * Function that receive a POST REQUEST and
+ * log in an existing user in the DB.
+ * (used in the login page)
+ */
 const logIn = async (req, res) => {
 
 	// retrieve username and password from request's body
@@ -162,21 +179,6 @@ const logIn = async (req, res) => {
 	}
 
 };
-
-// function to log out an existing user
-// ...
-
-//--------------------------------------------------------------------
-
-//Show login entry page
-////const showLoginPage = (req, res) => {
-////  res.sendFile(path.join(__dirname, '../views/login.html'));
-////}; 
-
-//Show signup entry page
-////const showSignUpPage = (req, res) => {
-////  res.sendFile(path.join(__dirname, '../views/signup.html'))
-////}
 
 // export this functions to call them from other files  
 module.exports = {

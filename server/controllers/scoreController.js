@@ -1,43 +1,59 @@
+/* JS file to do the logic of the routes related to the scores and the scoreboard */
+
 const path = require('path');
 
 const Score = require('../models/score');
 
-
+/**
+ * Function that need to receive a POST REQUEST
+ * with the following body:
+ * {
+ * 	"username": ... ,
+ * 	"correctEasy": ...,
+ * 	"correctMedium": ...,
+ * 	"correctHard": ...,
+ * 	"total": ...
+ * }
+ * with this parameters, the functions will update
+ * or create a new score for the user in the database
+ */
 const updateScore = async (req, res) => {
-    try {
-        const { username, correctEasy, correctMedium, correctHard, total } = req.body;
+	try {
+		const { username, correctEasy, correctMedium, correctHard, total } = req.body;
 
-        // Utiliza findOne en lugar de find para obtener un solo documento
-        const userScore = await Score.findOne({ username });
+		// find one score with that username 
+		const userScore = await Score.findOne({ username });
 
-        let score;
+		let score;
 
-        if (userScore) {
-            console.log('username already exists' + userScore);
-            userScore.correctEasy += correctEasy;
-            userScore.correctMedium += correctMedium;
-            userScore.correctHard += correctHard;
-            userScore.total += total;
+		if (userScore) {
+			//console.log('username already exists' + userScore);
+			userScore.correctEasy += correctEasy;
+			userScore.correctMedium += correctMedium;
+			userScore.correctHard += correctHard;
+			userScore.total += total;
 
-            score = userScore;
-        } else {
-            console.log('username does not exist');
-            score = new Score({ username, correctEasy, correctMedium, correctHard, total });
-        }
+			score = userScore;
+		} else {
+			//console.log('username does not exist');
+			score = new Score({ username, correctEasy, correctMedium, correctHard, total });
+		}
 
-        // Utiliza save() en el documento específico
-        await score.save();
+		// save that updated/new score
+		await score.save();
 
-        res.json({ message: 'Score updated successfully' });
+		res.json({ message: 'Score updated successfully' });
 
-    } catch (error) {
-        console.log('ERROR: Error in updateScore():', error);
-        res.status(500).json({ error: 'Error while saving score' });
-    }
+	} catch (error) {
+		console.log('ERROR: Error in updateScore():', error);
+		res.status(500).json({ error: 'Error while saving score' });
+	}
 };
 
-
-
+/**
+ * Function that receive a GET REQUEST and
+ * returns all the scores from the DB.
+ */
 const getAllScores = async (req, res) => {
 
 	try {
@@ -53,6 +69,11 @@ const getAllScores = async (req, res) => {
 	}
 };
 
+/**
+ * Function that receive a GET REQUEST and
+ * returns all the scores from the DB
+ * to fill the table in scoreboard.html
+ */
 const getTop = async (req, res) => {
 
 	try {
@@ -69,9 +90,17 @@ const getTop = async (req, res) => {
 	}
 };
 
-// Show signup entry page
+/**
+ * Function that receive a GET REQUEST and
+ * returns the scoreboard.html page
+ */
 const showScoreboardPage = (req, res) => {
 	res.sendFile(path.join(__dirname, '../views/scoreboard.html'))
 };
 
-module.exports = { getAllScores, getTop, showScoreboardPage, updateScore };
+module.exports = {
+	updateScore, 
+	getAllScores,
+	getTop,
+	showScoreboardPage,
+};

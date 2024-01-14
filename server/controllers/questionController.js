@@ -1,16 +1,23 @@
+/* JS file to do the logic of the routes related to the questions and the quiz creation */
+
 const path = require('path');
 
 const Question = require('../models/question');
 const Category = require('../models/category');
 const { createUrlApi, resetTokenTriviaApi } = require('../utils/urlApiUtils');
-const { stringify } = require('querystring');
-const { create } = require('../models/user');
 
-
+/* Function that need to receive a POST REQUEST 
+ * with the following body:
+ * { 
+ * 	"category": ... ,
+ * 	"difficulty": ...,
+ * 	"type": ...
+ * }
+ * with this parameters, the functions will return a JSON
+ * with 10 questions from the Trivia API
+*/
 const createQuiz = async (req, res) => {
-	console.log('createQuiz()');
-
-	//const { token } = req.body;
+	//console.log('createQuiz()');
 
 	let { category, difficulty, type } = req.body;
 	let options = {};
@@ -20,7 +27,7 @@ const createQuiz = async (req, res) => {
 		{ condition: difficulty !== '', key: 'difficulty' },
 		{ condition: type !== '', key: 'type' }
 	];
-	
+
 	conditions.forEach(({ condition, key }) => {
 		if (condition) {
 			options[key] = req.body[key];
@@ -29,10 +36,8 @@ const createQuiz = async (req, res) => {
 
 	options.amount = 10;
 
-	//console.log('req.body:', req.body);
-
 	const url = await createUrlApi(options, false);
-	console.log('createQuiz ->url:', url);
+	//console.log('createQuiz ->url:', url);
 
 	let response = await fetch(url);
 
@@ -47,6 +52,7 @@ const createQuiz = async (req, res) => {
 	if (data.response_code !== 0) {
 		//throw new Error(`API error! Response code: ${data.response_code}\n${data}`);
 		console.log(`API error! Response code: ${data.response_code}\n${data}`);
+		return {}
 	}
 
 	let questionsRaw = data.results;
@@ -59,23 +65,27 @@ const createQuiz = async (req, res) => {
 		}
 	});
 
-	console.log('createQuiz -> questions:', questions);
+	// CONSOLE LOG TO SEE THE QUESTIONS AND ANSWERS IN THE CONSOLE
+	//console.log('createQuiz -> questions:', questions);
 
-	if(questions.length === 0){
-		return res.json({error: 'No questions found'});
+	if (questions.length === 0) {
+		return res.json({ error: 'No questions found' });
 	}
 
 	return res.json(questions);
 }
 
-
-
+/**
+ * Function that receive a GET REQUEST and 
+ * returns all the categories from the DB
+ * to fill selects/cards in questions.html
+ */
 const getCategories = async (req, res) => {
 	try {
 
 		// retrieve categories from DB, only categoryName and categoryValue
 		// to fill selects/cards 
-		const categories = await Category.find({}, {categoryName: 1, categoryValue: 1, _id: 0});
+		const categories = await Category.find({}, { categoryName: 1, categoryValue: 1, _id: 0 });
 
 		res.json(categories);
 
@@ -85,21 +95,24 @@ const getCategories = async (req, res) => {
 	}
 }
 
-
+/**
+ * Function that receive a POST REQUEST and
+ * add a question to the DB as an user 
+ */
 const addQuestion = async (req, res) => {
-	console.log('addQuestion()');
-	try{
+	//console.log('addQuestion()');
+	try {
 
 		const { type, difficulty, category, question,
-			 correctAnswer, incorrectAnswers, username } = req.body;
+			correctAnswer, incorrectAnswers, username } = req.body;
 
 		let lccorrectAnswer = correctAnswer.toLowerCase();
 		let lcincorrectAnswers = incorrectAnswers.map(incorrectAnswer => incorrectAnswer.toLowerCase());
-		
-		const newQuestion = new Question({type, difficulty, category, question, 'correctAnswer' : lccorrectAnswer, 'incorrectAnswer': lcincorrectAnswers, 'createdBy': username});
+
+		const newQuestion = new Question({ type, difficulty, category, question, 'correctAnswer': lccorrectAnswer, 'incorrectAnswer': lcincorrectAnswers, 'createdBy': username });
 
 		console.log('newQuestion:', newQuestion);
-			
+
 		if (await newQuestion.save()) {
 			console.log('Question added successfully');
 			res.json({ success: 'Question added successfully' });
@@ -110,23 +123,19 @@ const addQuestion = async (req, res) => {
 
 		}
 
-		//const newUser = new User({ "username": username, "password": hashedPassword });
-		//await newUser.save();
-
-
-
 	} catch (error) {
 		console.log('ERROR: Error in addQuestion():', error);
 		res.status(500).json({ error: 'Error while adding question' });
 	}
-
 };
 
 
-
-
-// Get all questions from DB
-// to use in question modal for 'any-category' (question code = -1)
+/**
+ * Function that receive a GET REQUEST and
+ * returns all the questions from the DB
+ * to fill the card category 'user-questions'
+ * in questions.html.
+ */
 const getAllQuestions = async (req, res) => {
 
 	try {
@@ -146,8 +155,14 @@ const getAllQuestions = async (req, res) => {
 	}
 };
 
-// Get questions from DB by category
-// maybe to delete idk yet
+/**
+ * Function that receive a GET REQUEST and
+ * returns all the questions from the DB of a
+ * given category to fill the card category
+ * 
+ * Not used in the project, but maybe in the future
+ * 
+ */
 const getQuestionsDbByCategory = async (req, res) => {
 
 	try {
@@ -167,14 +182,18 @@ const getQuestionsDbByCategory = async (req, res) => {
 	}
 }
 
-// Get questions from Trivia API by category
+/**
+ * Function that receive a GET REQUEST and 
+ * returns all the questions from the Trivia API
+ * of a given category to fill the card category.
+ */
 const getQuestionsByCategory = async (req, res) => {
 	// deal with REQUESTS to the trivia API
 
 	// category is the only thing that is recived from questions.html
 	// when clicking a card, the others are set by default HERE
 	const url = await createUrlApi({ amount: 10, category: req.params.category }, true); //, type: 'multiple', difficulty: 'easy' });
-	console.log('getQuestionsByCategory() ->url:', url);
+	//console.log('getQuestionsByCategory() ->url:', url);
 
 	let response = await fetch(url);
 
@@ -225,20 +244,22 @@ const getQuestionsByCategory = async (req, res) => {
 	});
 
 	return res.json(questions);
-
 }
 
-// Show questions entry page
+/**
+ * Function that receive a GET REQUEST and
+ * returns the questions.html page
+ */
 const showQuestionsPage = (req, res) => {
 	res.sendFile(path.join(__dirname, '../views/questions.html'))
 };
 
 module.exports = {
+	createQuiz,
+	getCategories,
+	addQuestion,
 	getAllQuestions,
-	showQuestionsPage,
 	getQuestionsDbByCategory,
 	getQuestionsByCategory,
-	addQuestion,
-	getCategories,
-	createQuiz
+	showQuestionsPage
 };

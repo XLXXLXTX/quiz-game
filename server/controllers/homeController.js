@@ -1,3 +1,5 @@
+/* JS file to do the logic of the routes related to the home page and the entry pages */
+
 const path = require('path');
 
 // Show home page
@@ -32,6 +34,10 @@ const showProfilePage = (req, res) => {
 
 // export this functions to call them from other files  
 module.exports = {
-	showHomePage, showStartQuizGamePage, showAboutPage,
-	showLoginPage, showSignUpPage, showProfilePage
+	showHomePage, 
+	showStartQuizGamePage,
+	showAboutPage,
+	showLoginPage,
+	showSignUpPage,
+	showProfilePage
 };
