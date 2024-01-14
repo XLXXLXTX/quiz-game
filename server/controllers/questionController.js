@@ -66,7 +66,7 @@ const createQuiz = async (req, res) => {
 	});
 
 	// CONSOLE LOG TO SEE THE QUESTIONS AND ANSWERS IN THE CONSOLE
-	//console.log('createQuiz -> questions:', questions);
+	console.log('createQuiz -> questions:', questions);
 
 	if (questions.length === 0) {
 		return res.json({ error: 'No questions found' });

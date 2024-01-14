@@ -97,7 +97,7 @@ const resetTokenTriviaApi = async () => {
     const token = getTokenTriviaApi();
 
     let url = `${urlreset}${token}`;
-    console.log('url:', url);
+    console.log(`⌛ Fetching Trivia API URL to reset the token ... \n\t${url}`);
     const response = await fetch(url);
 
     if (!response.ok) {
