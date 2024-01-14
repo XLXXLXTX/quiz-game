@@ -1,4 +1,4 @@
-/* define routes to call controllers */
+/* JS file with the routes that can be accessed from the home page */ 
 
 const express = require('express');
 
@@ -21,6 +21,7 @@ router.get('/questions', showQuestionsPage);
 router.get('/scoreboard', showScoreboardPage);
 router.get('/about', showAboutPage);
 
+// routes for user profile
 router.get('/profile', isAuthenticated, showProfilePage);
 router.post('/profile-info', isAuthenticated, userController.getUserInfo);
 
