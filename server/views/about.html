@@ -7,17 +7,17 @@
 	<title>About Us</title>
 	<link rel="stylesheet" href="../../public/css/about.css">
 
-	<script>
-		function goBack() {
-			window.location.href = "/";
-		}
-	</script>
+	<!-- import the axios library -->
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+	<!-- import the shared functions -->
+	<script src="../../public/js/utils/shared-functions.js"></script>
 
 </head>
 
 <body>
 
-	<button class="back-button" onclick="goBack()">Go Back</button>
+	<button class="back-button" onclick="redirect('/')">Go Back</button>
 
 	<div class="header">
 		<h1>About us</h1>

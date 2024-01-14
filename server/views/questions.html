@@ -11,18 +11,15 @@
 
 	<script type="module" src="../../public/js/questions/questions.js"></script>
 	
+	<!-- import the axios library -->
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-	<script>
-		function goBack() {
-			window.location.href = "/";
-		}
+	<!-- import the shared functions -->
+	<script src="../../public/js/utils/shared-functions.js"></script>
+	<!-- import the functions for this page -->
+	<script src="../../public/js/index/index.js"></script>
 
-		function getCookie(name) {
-			const value = `; ${document.cookie}`;
-			const parts = value.split(`; ${name}=`);
-			if (parts.length === 2) return parts.pop().split(';').shift();
-		}
+	<script>
 
 		function checkFields(category, difficulty, type, question, correctAnswer, incorrectAnswer1, incorrectAnswer2, incorrectAnswer3){
 
@@ -83,7 +80,7 @@
 		}
 
 		async function submitNewQuestion() {
-			alert('submitNewQuestion');
+			//alert('submitNewQuestion');
 			const category = document.getElementById('question-category').value;
 			const difficulty = document.getElementById('question-difficulty').value;
 			const type = document.getElementById('question-type').value;
@@ -138,25 +135,6 @@
 				console.error('Error decoding token:', error);
 			}
 
-			
-		}
-
-		function populateSelect(elementId, data) {
-
-			console.log('populateSelect:', elementId, data);
-
-			const selectElement = document.getElementById(elementId);
-
-			// Limpiar el select antes de agregar nuevas opciones
-			selectElement.innerHTML = '';
-
-			// Agregar las opciones de la API
-			for (const category of data) {
-				const option = document.createElement('option');
-				option.value = category.value;
-				option.text = category.name;
-				selectElement.appendChild(option);
-			}
 		}
 
 	</script>
@@ -167,7 +145,7 @@
 
 	<button id="add-question-btn" class="add-question-btn add-question-btn-hide">Add a Question</button>
 
-	<button class="back-button" onclick="goBack()">Go Back</button>
+	<button class="back-button" onclick="redirect('/')">Go Back</button>
 
 	<div class="header">
 		<h1>Questions by category</h1>

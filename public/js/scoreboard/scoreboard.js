@@ -1,6 +1,6 @@
+/* JS file with functions for the scoreboard page */
 
 const questionsScores = { 'correctEasy': 1, 'correctMedium': 3, 'correctHard': 5 };
-
 
 document.addEventListener('DOMContentLoaded', async () => {
 

@@ -7,17 +7,14 @@
 	<title>Quiz Game</title>
 	<link rel="stylesheet" href="../../public/css/profile.css">
 
-	<script type="module" src="../../public/js/profile/profile.js"></script>
-
+	<!-- import the axios library -->
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-	<script>
+	<!-- import the shared functions -->
+	<script src="../../public/js/utils/shared-functions.js"></script>
+	<!-- import the functions for this page -->
+	<script type="module" src="../../public/js/profile/profile.js"></script>
 
-		function redirect(page) {
-			window.location.href = page;
-		}
-
-	</script>
 </head>
 
 <body>
@@ -34,11 +31,6 @@
 		<img class="img-profile" src="../../public/img/profile.jpg" alt="profile picture">
 	</div>
 
-	<!--
-	<div id="edit-profile" class="edit-profile">
-		<span>⚙ Edit Profile</span>
-	</div>
-	-->
 	<div class="center-div stats-container">
 
 		<h2>Statistics:</h2>

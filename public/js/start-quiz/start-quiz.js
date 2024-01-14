@@ -1,3 +1,4 @@
+/* JS file with functions for the start-quiz page */
 
 // define variables for html elements
 const startBtn = document.getElementById('start-quiz-btn');
@@ -21,60 +22,6 @@ const playAgainBtn = document.getElementById('play-again-btn');
 // define variables for quiz questions 
 
 let questions = [];
-/*
-let questions = [
-	{
-		question: 'An exothermic reaction is a chemical reaction that releases energy by radiating electricity.',
-		answers: ['False', 'True'],
-		correctAnswer: 'False'
-	},
-	{
-		question: 'Celiac Disease is a disease that effects the heart, causing those effected to be unable to eat meat.',
-		answers: ['True', 'False'],
-		correctAnswer: 'False'
-	},
-	{
-		question: 'An atom contains a nucleus.',
-		answers: ['False', 'True'],
-		correctAnswer: 'True'
-	},
-	{
-		question: 'Not including false teeth; A human has two sets of teeth in their lifetime.',
-		answers: ['False', 'True'],
-		correctAnswer: 'True'
-	},
-	{
-		question: 'An Astronomical Unit is the distance between Earth and the Moon.',
-		answers: ['True', 'False'],
-		correctAnswer: 'False'
-	},
-	{
-		question: 'An average human can go two weeks without water.',
-		answers: ['False', 'True'],
-		correctAnswer: 'False'
-	},
-	{
-		question: 'Water always boils at 100&deg;C, 212&deg;F, 373.15K, no matter where you are.',
-		answers: ['True', 'False'],
-		correctAnswer: 'False'
-	},
-	{
-		question: 'Psychology is the science of behavior and mind.',
-		answers: ['False', 'True'],
-		correctAnswer: 'True'
-	},
-	{
-		question: 'A plant that has a life cycle for more than a year is known as an annual.',
-		answers: ['True', 'False'],
-		correctAnswer: 'False'
-	},
-	{
-		question: 'Igneous rocks are formed by excessive heat and pressure.',
-		answers: ['False', 'True'],
-		correctAnswer: 'False'
-	}
-];
-*/
 
 let selectedAnswers = [];
 
@@ -94,13 +41,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 	// populate the quiz options
 	// get the categories from the API
 	const c = await getCategories();
-	console.log('c:', c)
+	//console.log('c:', c)
 
 	const categories = c.map(category => ({
 		name: category.categoryName,
 		value: category.categoryValue
 	}));
-	console.log('categories:', categories);
+	//console.log('categories:', categories);
 	//console.log('categories:', c);
 	populateSelect('category', categories);
 
@@ -118,12 +65,11 @@ async function startQuiz() {
 
 	// read the options from the html
 
-	console.log('User selected category.value:', category.value);
-	console.log('User selected difficulty.value:', difficulty.value);
-	console.log('User selected type.value:', type.value);
+	//console.log('User selected category.value:', category.value);
+	//console.log('User selected difficulty.value:', difficulty.value);
+	//console.log('User selected type.value:', type.value);
 
 	// call the function to fetch the questions from the API, with the options selected
-	// @@@@ DESCOMENTAR ESTO @@@@
 	await fetchQuestions(category.value, difficulty.value, type.value);
 
 	showQuestion(currentQuestionIndex);
@@ -148,10 +94,8 @@ async function fetchQuestions(category, difficulty, type) {
 	}
 
 	//console.log('fetchQuestions -> response.data:', response.data);
-	console.log('fetchQuestions -> response.data:', response.data);
+	//console.log('fetchQuestions -> response.data:', response.data);
 	questions = response.data;
-
-	//alert('Ya se obtuvieron las preguntas');
 
 	//const { id } = response.data;
 }
@@ -169,7 +113,7 @@ function showQuestion(index) {
 		button.textContent = currentQuestion.answers[i];
 		button.classList.add(btnClasses[i]);
 
-		// Verificar si esta respuesta está seleccionada
+		// verify if the answer was selected previously
 		if (selectedAnswers[index] === currentQuestion.answers[i]) {
 			button.classList.add('selected');
 		}
@@ -190,62 +134,36 @@ function showQuestion(index) {
 }
 
 function selectAnswer(button) {
-	// Remover la clase 'selected' de todos los botones
+
+	// remove the class 'selected' from all the buttons
 	document.querySelectorAll('.question-answers button').forEach(btn => btn.classList.remove('selected'));
 
-	// Agregar la clase 'selected' al botón seleccionado
+	// add the class 'selected' to the selected button
 	button.classList.add('selected');
 
-	// Guardar la respuesta seleccionada en la matriz
+	// save the selected answer in the array
 	selectedAnswers[currentQuestionIndex] = button.textContent;
 
-	// Esperar 2 segundos antes de pasar a la siguiente pregunta
+	// wait 1 second and show the next question
 	setTimeout(() => {
-		// Actualizar el índice de la pregunta actual
+		// update the currentQuestionIndex
 		currentQuestionIndex++;
 
-		// Verificar si hay más preguntas
+		// verify if there are more questions
 		if (currentQuestionIndex < questions.length) {
 			showQuestion(currentQuestionIndex);
 		} else {
 
-			//ate the end of the quiz, hide the question container
+			//at the end of the quiz, hide the question container
 			questionContainer.classList.add('hidden');
 
-
 			// at the end of the quiz, show the results
-
 			calculateResults();
 
-			// Mostrar un mensaje con las respuestas al final del cuestionario
-			//alert('Quiz complete! Your answers: ' + JSON.stringify(selectedAnswers));
-			//resetQuiz();
 		}
-	}, 1200); // Esperar 2000 milisegundos (2 segundos)
+	}, 1200); 
 }
 
-/*
-function nextQuestion() {
-	// Obtener las respuestas seleccionadas de los botones
-	const selectedButton = document.querySelector('.question-answers button.selected');
-	const selectedAnswer = selectedButton ? selectedButton.textContent : null;
-
-	// Guardar la respuesta seleccionada en la matriz
-	selectedAnswers[currentQuestionIndex] = selectedAnswer;
-
-	// Actualizar el índice de la pregunta actual
-	currentQuestionIndex++;
-
-	// Verificar si hay más preguntas
-	if (currentQuestionIndex < questions.length) {
-		showQuestion(currentQuestionIndex);
-	} else {
-		// Mostrar un mensaje con las respuestas al final del cuestionario
-		alert('Quiz complete! Your answers: ' + JSON.stringify(selectedAnswers));
-		resetQuiz();
-	}
-}
-*/
 
 async function calculateResults() {
 	console.log('calculateResults()');
@@ -258,7 +176,7 @@ async function calculateResults() {
 		//console.log(`selectedAnswers[${i}] === questions[${i}].correctAnswer -> ${selectedAnswers[i]} === ${questions[i].correctAnswer}`);
 		if (selectedAnswers[i] === questions[i].correctAnswer) {
 			correctAnswers++;
-			console.log('Correcta pregunta ' + i);
+			console.log('correct answer for question ' + i);
 		}
 	}
 
@@ -357,75 +275,4 @@ function resetQuiz() {
 	// hide the question container
 	questionContainer.classList.add('hidden');
 }
-
-/*
-const questions = [
-	{
-		question: 'What is the capital of France?',
-		answers: ['Berlin', 'Madrid', 'Paris', 'Rome'],
-		correctAnswer: 'Paris'
-	},
-	{
-		question: 'Which planet is known as the Red Planet?',
-		answers: ['Mars', 'Venus', 'Jupiter', 'Saturn'],
-		correctAnswer: 'Mars'
-	},
-	{
-		question: 'Es hoy el cumpleaños de mi hermana?',
-		answers: ['Si', 'No'],
-		correctAnswer: 'No'
-	}
-	// Add more questions as needed
-];
-*/
-
-
-/*-----------------------------------------------------*/
-/*-----------------  FUNCTIONS  -----------------------*/
-/*-----------------  REPETIDAS  -----------------------*/
-/*-----------------------------------------------------*/
-
-function getCookie(name) {
-	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
-	if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
-async function getCategories() {
-	const response = await axios.get('/questions/categories');
-
-	//console.log('response:', response);
-
-	if (!response.data) {
-		alert('Error: /questions/categories');
-		throw new Error('Error: /questions/categories');
-	}
-
-	const categories = response.data
-	console.log('getCategories -> categories:', categories);
-	return categories;
-}
-
-
-function populateSelect(elementId, data) {
-	const selectElement = document.getElementById(elementId);
-
-	// Limpiar el select antes de agregar nuevas opciones
-	selectElement.innerHTML = '';
-
-	// Agregar una opción predeterminada
-	//const defaultOption = document.createElement('option');
-	//defaultOption.value = '';
-	//defaultOption.text = 'Choose a Category';
-	//selectElement.appendChild(defaultOption);
-
-	// Agregar las opciones de la API
-	for (const category of data) {
-		const option = document.createElement('option');
-		option.value = category.value;
-		option.text = category.name;
-		selectElement.appendChild(option);
-	}
-}
-
 

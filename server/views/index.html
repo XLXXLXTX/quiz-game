@@ -7,50 +7,15 @@
 	<title>Quiz Game</title>
 	<link rel="stylesheet" href="../../public/css/index.css">
 
+	<!-- import the axios library -->
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+	<!-- import the shared functions -->
+	<script src="../../public/js/utils/shared-functions.js"></script>
+	<!-- import the functions for this page -->
+	<script src="../../public/js/index/index.js"></script>
+
 	<script>
-
-		function redirect(page) {
-			window.location.href = page;
-		}
-
-		// obtain 'token' from the cookie
-		function getCookie(name) {
-			const value = `; ${document.cookie}`;
-			const parts = value.split(`; ${name}=`);
-			if (parts.length === 2) return parts.pop().split(';').shift();
-		}
-
-		// Function to decode the token on the backend and display user info
-		async function displayUserInfo() {
-			
-			// Get the encoded token from the cookie
-			const token = getCookie('token');
-
-			if (token) {
-				try {
-					// Make a request to the backend to decode the token
-					const response = await axios.post('/api/decode-token', { token });
-
-					if (!response.data) {
-						alert('Error: Invalid token');
-						throw new Error('Invalid token');
-					}
-
-					// Display user information in the 'user-info' div
-					const userInfoDiv = document.getElementById('user-info');
-					userInfoDiv.innerHTML = `Welcome back, <span>${response.data.username}</span> !`;
-
-					const profileBtn = document.querySelector('.profile-btn');
-					profileBtn.classList.remove('profile-btn-hide');
-					profileBtn.classList.add('profile-btn-show');
-
-				} catch (error) {
-					console.error('Error decoding token:', error);
-				}
-			}
-		}
 
 		// Call the function when the page loads
 		document.addEventListener('DOMContentLoaded', displayUserInfo);

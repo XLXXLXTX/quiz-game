@@ -1,98 +1,106 @@
-// obtain 'token' from the cookie
-
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
+/* JS file with functions for the profile page */
 
 async function getProfileInfo() {
 
-    const token = getCookie('token');
+	const token = getCookie('token');
 
-    if (!token) {
-        alert('Error: Invalid token');
-        throw new Error('Invalid token');
-    }
+	if (!token) {
+		alert('Error: Invalid token');
+		throw new Error('Invalid token');
+	}
 
-    try {
+	try {
 
-        let response = await axios.post('/api/decode-token', { token });
+		let response = await axios.post('/api/decode-token', { token });
 
-        if (!response.data) {
-            alert('Error: Invalid token');
-            throw new Error('Invalid token');
-        }
+		if (!response.data) {
+			alert('Error: Invalid token');
+			throw new Error('Invalid token');
+		}
 
-        const { id } = response.data;
+		const { id } = response.data;
 
-        response = await axios.post('/profile-info', { id })
+		response = await axios.post('/profile-info', { id })
 
-        console.log('response2: ', response);
+		//console.log('response2: ', response);
 
-        if (!response.data) {
-            alert('Error: /profile-info');
-            throw new Error('Error: /profile-info');
-        }
+		if (!response.data) {
+			alert('Error: /profile-info');
+			throw new Error('Error: /profile-info');
+		}
 
-        const { username, score, questions } = response.data;
+		const { username, score, questions } = response.data;
 
-        const userUsername = document.getElementById('user-username');
-        userUsername.innerHTML = username;
+		const userUsername = document.getElementById('user-username');
+		userUsername.innerHTML = username;
 
-        const { correctEasy, correctMedium, correctHard, total } = score;
+		//const { correctEasy = 0, correctMedium = 0, correctHard = 0, total = 0 } = score;
 
-        const statsCorrectAnswers = document.getElementById('stats-correct-answers');
-        statsCorrectAnswers.innerHTML = correctEasy + correctMedium + correctHard;
+		let correctEasy = 0;
+		let correctMedium = 0;
+		let correctHard = 0;
+		let total = 0;
 
-        const statsCorrectEasy = document.getElementById('stats-correct-easy');
-        statsCorrectEasy.innerHTML = correctEasy;
+		// in case that the user has not played yet the game
+		// so the score is null, we need to set the values to 0 for now
+		if (score !== null && typeof score === 'object') {
+			correctEasy = score.correctEasy;
+			correctMedium = score.correctMedium;
+			correctHard = score.correctHard;
+			total = score.total;
+		}
 
-        const statsCorrectMedium = document.getElementById('stats-correct-medium');
-        statsCorrectMedium.innerHTML = correctMedium;
+		const statsCorrectAnswers = document.getElementById('stats-correct-answers');
+		statsCorrectAnswers.innerHTML = correctEasy + correctMedium + correctHard;
 
-        const statsCorrectHard = document.getElementById('stats-correct-hard');
-        statsCorrectHard.innerHTML = correctHard;
+		const statsCorrectEasy = document.getElementById('stats-correct-easy');
+		statsCorrectEasy.innerHTML = correctEasy;
 
-        const statsTotalPoints = document.getElementById('stats-total-points');
-        statsTotalPoints.innerHTML = total;
+		const statsCorrectMedium = document.getElementById('stats-correct-medium');
+		statsCorrectMedium.innerHTML = correctMedium;
 
-        const tableQuestions = document.getElementById('table-questions');
+		const statsCorrectHard = document.getElementById('stats-correct-hard');
+		statsCorrectHard.innerHTML = correctHard;
 
-        questions.forEach(question => {
-            const { category, difficulty, question: questionText, correctAnswer } = question;
+		const statsTotalPoints = document.getElementById('stats-total-points');
+		statsTotalPoints.innerHTML = total;
 
-            const tr = document.createElement('tr');
+		const tableQuestions = document.getElementById('table-questions');
 
-            const tdCategory = document.createElement('td');
-            tdCategory.innerHTML = category;
+		questions.forEach(question => {
+			const { category, difficulty, question: questionText, correctAnswer } = question;
 
-            const tdDifficulty = document.createElement('td');
-            tdDifficulty.innerHTML = difficulty;
+			const tr = document.createElement('tr');
 
-            const tdQuestion = document.createElement('td');
-            tdQuestion.innerHTML = questionText;
+			const tdCategory = document.createElement('td');
+			tdCategory.innerHTML = category;
 
-            const tdAnswer = document.createElement('td');
-            tdAnswer.innerHTML = correctAnswer;
+			const tdDifficulty = document.createElement('td');
+			tdDifficulty.innerHTML = difficulty;
 
-            tr.appendChild(tdCategory);
-            tr.appendChild(tdDifficulty);
-            tr.appendChild(tdQuestion);
-            tr.appendChild(tdAnswer);
+			const tdQuestion = document.createElement('td');
+			tdQuestion.innerHTML = questionText;
 
-            tableQuestions.appendChild(tr);
-        });
+			const tdAnswer = document.createElement('td');
+			tdAnswer.innerHTML = correctAnswer;
 
-    } catch (error) {
-        console.error('Error', error);
-    }
+			tr.appendChild(tdCategory);
+			tr.appendChild(tdDifficulty);
+			tr.appendChild(tdQuestion);
+			tr.appendChild(tdAnswer);
+
+			tableQuestions.appendChild(tr);
+		});
+
+	} catch (error) {
+		console.error('Error', error);
+	}
 
 }
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    //laod user info 
-    getProfileInfo();
+	//laod user info 
+	getProfileInfo();
 
 });

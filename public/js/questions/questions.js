@@ -1,4 +1,4 @@
-// clientside javascript for questions page (questions.html)
+/* JS file with functions for the questions page */
 
 import { initializeModal } from '../utils/modal.js';
 
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	categoryCards.forEach(card => {
 		card.addEventListener('click', async () => {
-			const category = card.classList[1]; // asumiendo que la clase category-X contiene la categoría
+			const category = card.classList[1]; 
 
 			//console.log(`You clicked on ${category}`);
 			//console.log(` ${category} is ${categoriesReqAPI[category]}`)
@@ -190,7 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const addQuestion = document.getElementById('add-question-btn');
 
 	addQuestion.addEventListener('click', async () => {
-		//alert('Edit Profile');
 
 		let tmp = `
 
@@ -258,3 +257,4 @@ document.addEventListener('DOMContentLoaded', () => {
 		populateSelect('question-type', types);
 	});
 });
+

@@ -8,21 +8,19 @@
 
 	<link rel="stylesheet" href="../../public/css/start-quiz.css">
 
-	<script type="module" src="../../public/js/start-quiz/start-quiz.js"></script>
-	
+	<!-- import the axios library -->
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-	<script>
-		function goBack() {
-			window.location.href = "/";
-		}
-	</script>
+	<!-- import the shared functions -->
+	<script src="../../public/js/utils/shared-functions.js"></script>
+	<!-- import the functions for this page -->
+	<script type="module" src="../../public/js/start-quiz/start-quiz.js"></script>
 
 </head>
 
 <body>
 
-	<button class="back-button" onclick="goBack()">Go Back</button>
+	<button class="back-button" onclick="redirect('/')">Go Back</button>
 	
 	<div class="header">
 		<h1>Start a Quiz</h1>
@@ -86,24 +84,6 @@
 			<button id="play-again-btn" class="play-again-btn">Play Again</button>
 		</div>
 
-		<!--
-		<div id="question-container" class="question-container hidden">
-			<p id="question-text">Which planet is known as the Red Planet?</p>
-			<div id="answers-container" class="answers-container">
-				
-				<div class="question-answers">
-					<button class="answer-1-btn">Mars</button>
-					<button class="answer-2-btn">Jupiter</button>
-				</div>
-
-				<div class="question-answers">
-					<button class="answer-3-btn">Earth</button>
-					<button class="answer-4-btn">Venus</button>
-				</div>
-			</div>
-			<button id="next-question-btn" class="next-question-btn">Next Question</button>
-		</div>
-		-->
 	</div>
 
 
