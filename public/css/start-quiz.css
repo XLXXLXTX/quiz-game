@@ -1,67 +1,72 @@
+/* CSS file for start-quiz.html */
+
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap');
 
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #121327;
-    font-family: 'Lexend', sans-serif;
-    color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	background-color: #121327;
+	font-family: 'Lexend', sans-serif;
+	color: #fff;
 }
 
 .back-button {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: inherit;
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	background-color: #3498db;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	font-family: inherit;
 }
 
 .back-button:hover {
-    background-color: #2980b9;
-    cursor: pointer;
+	background-color: #2980b9;
+	cursor: pointer;
 }
 
 .header {
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    width: 100%;
-    box-sizing: border-box;
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 .quiz-options {
-    width: 100%;
-    font-size: 18px;
-    text-align: center;
-    border: 2px dashed #fff;
-    padding: 20px;
-    margin: 20px;
-    box-sizing: border-box; /* Esto es para incluir el padding y el borde en la altura y el ancho */
+	width: 100%;
+	font-size: 18px;
+	text-align: center;
+	border: 2px dashed #fff;
+	padding: 20px;
+	margin: 20px;
+	box-sizing: border-box;
+	/* this is to include the padding and border in the height and width */
 }
 
 .quiz-options-text {
-    width: auto;
+	width: auto;
 }
 
 .quiz-container {
-    text-align: center;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 100vh; /* Ajusta la altura al 100% de la altura de la ventana */
-    box-sizing: border-box; /* Esto es para incluir el padding y el borde en la altura y el ancho */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+	text-align: center;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	height: 100vh;
+	/* set the height to 100% of the window */
+	box-sizing: border-box;
+	/* this is to include the padding and border in the height and width */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 /*-----------------------------------------------------*/
@@ -69,136 +74,129 @@ body {
 /*-----------------------------------------------------*/
 
 .quiz-options-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
 }
 
 .quiz-option {
-    width: 25%;
-    box-sizing: border-box;
-    margin-bottom: 20px;
+	width: 25%;
+	box-sizing: border-box;
+	margin-bottom: 20px;
 }
 
 .quiz-option label,
 .quiz-option select {
-    width: 100%;
+	width: 100%;
 }
 
 
-/* Estilos generales para el select */
 select {
-    font-family: 'Lexend', sans-serif;
-    font-size: 14px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
-    cursor: pointer;
-    text-align: center;
+	font-family: 'Lexend', sans-serif;
+	font-size: 14px;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
 }
 
-/* Estilo al pasar el ratón sobre el select */
 select:hover {
-    border-color: #333;
+	border-color: #333;
 }
 
-/* Estilo cuando el select está enfocado */
 select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+	border-color: #007bff;
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Estilo para las opciones dentro del select */
 select option {
-    font-family: 'Lexend', sans-serif;
-    font-size: 14px;
+	font-family: 'Lexend', sans-serif;
+	font-size: 14px;
 }
+
 /*-----------------------------------------------------*/
-/*CSS FOR QUESTIONS CONTAINER */
+/*CSS FOR QUESTIONS CONTAINER                          */
 /*-----------------------------------------------------*/
+
 .question-container {
-    text-align: center;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
+	text-align: center;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	box-sizing: border-box;
 }
 
 .answers-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
 }
 
 .question-text {
-    font-size: 35px;
-    margin-bottom: 20px;
-    width:auto;
+	font-size: 35px;
+	margin-bottom: 20px;
+	width: auto;
 }
 
 .question-answers {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-.answer-1-btn, .answer-2-btn,
-.answer-3-btn, .answer-4-btn {
-    margin: 5px;
-    padding: 15px 30px; /* Ajusta el padding para cambiar el tamaño */
-    border-radius: 8px;
-    color: black;
-    cursor: pointer;
-    font-family: 'Lexend', sans-serif;
-    font-size: 18px;
-    width: 32vw; /* Ancho de los botones */
-    height: 12vh; /* Alto de los botones */
-
-    font-weight: bold;
+.answer-1-btn,
+.answer-2-btn,
+.answer-3-btn,
+.answer-4-btn {
+	margin: 5px;
+	padding: 15px 30px;
+	border-radius: 8px;
+	color: black;
+	cursor: pointer;
+	font-family: 'Lexend', sans-serif;
+	font-size: 18px;
+	width: 32vw;
+	height: 12vh;
+	font-weight: bold;
 }
 
 .answer-1-btn {
-    border: 1px solid #ffa602;
-    background-color: #ffc00a;
+	border: 1px solid #ffa602;
+	background-color: #ffc00a;
 }
 
 .answer-2-btn {
-    border: 1px solid #c60929;
-    background-color: #ff3355;
+	border: 1px solid #c60929;
+	background-color: #ff3355;
 }
 
 .answer-3-btn {
-    border: 1px solid #26890c;
-    background-color: #66bf39;
+	border: 1px solid #26890c;
+	background-color: #66bf39;
 }
 
 .answer-4-btn {
-    border: 1px solid #1368c3;
-    background-color: #33cccc;
+	border: 1px solid #1368c3;
+	background-color: #33cccc;
 }
 
 .answer-1-btn:hover {
-    background-color: #ffdd33;
+	background-color: #ffdd33;
 }
 
 .answer-2-btn:hover {
-    background-color: #ff99aa;
+	background-color: #ff99aa;
 }
 
 .answer-3-btn:hover {
-    background-color: #b2df9c;
+	background-color: #b2df9c;
 }
 
 .answer-4-btn:hover {
-    background-color: #a2d1f2;
+	background-color: #a2d1f2;
 }
-/*
-.answer-1-btn:hover, .answer-2-btn:hover,
-.answer-3-btn:hover, .answer-4-btn:hover  {
-    background-color: #2980b9;
-}
-*/
 
 /*-----------------------------------------------------*/
 /*CSS FOR START/NEXT BUTTON */
@@ -219,7 +217,7 @@ select option {
 	font-size: 16px;
 	cursor: pointer;
 	border-radius: 5px;
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .start-quiz-btn:hover,
@@ -228,49 +226,48 @@ select option {
 	background-color: #45a049;
 }
 
-/* Agrega estilos para la opción seleccionada */
+/* styles for the selected answer btn */
 .question-answers button.selected {
-    border: 1px solid #fff;
-    background-color: #a268fa; /* Un color verde, puedes cambiarlo según tus preferencias */
-    color: black; /* Texto en color blanco para contrastar */
-    font-weight: bold; /* Texto en negrita */
-  }
-  
+	border: 1px solid #fff;
+	background-color: #a268fa;
+	color: black;
+	font-weight: bold;
+}
+
 /*-----------------------------------------------------*/
-/*CSS FOR SCORE CONTAINER */
+/*CSS FOR SCORE CONTAINER                              */
 /*-----------------------------------------------------*/
 .results-container {
-    text-align: center;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 50vh; /* Ajusta la altura al 100% de la altura de la ventana */
-    box-sizing: border-box; /* Esto es para incluir el padding y el borde en la altura y el ancho */
-    display: flex;
-    flex-direction: column;
-    /*justify-content: space-between;*/
+	text-align: center;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	height: 50vh;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
 }
 
 .results-text {
-    font-size: 35px;
-    margin-bottom: 20px;
-    width:auto;
-    text-align: center;
+	font-size: 35px;
+	margin-bottom: 20px;
+	width: auto;
+	text-align: center;
 }
 
 .score {
 
-    font-weight: bold;
-    font-size: 45px;
-    color: #fff;
-    background-color: #6563b2;
-    border-radius: 8px;
-
+	font-weight: bold;
+	font-size: 45px;
+	color: #fff;
+	background-color: #6563b2;
+	border-radius: 8px;
 }
 
 /*-----------------------------------------------------*/
-/*CSS FOR HIDDING/SHOWING QUESTIONS  */
+/*CSS FOR HIDDING/SHOWING QUESTIONS                    */
+/*-----------------------------------------------------*/
 
 .hidden {
-    display: none;
+	display: none;
 }

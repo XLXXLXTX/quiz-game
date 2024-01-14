@@ -1,4 +1,5 @@
-/* styles for modal window */
+/* CSS file for modal windows included in others html (questions.html)*/
+
 .modal {
     display: none;
     position: fixed;
@@ -21,13 +22,11 @@
     width: 80%; /* testing */
     height: 70%; /* testing */
     color: black; 
-
     display: flex;
     flex-direction: column; /* contents will be stacked vertically */
     justify-content: center; /* contents will be centered horizontally */
     align-items: center; /* contents will be centered vertically */
     overflow-y: auto;
-
     box-sizing: border-box;
 
 }
@@ -52,14 +51,12 @@
     margin-bottom: 5px; 
 }
 
-
 .modal-content p {
     display: flex;
     justify-content: center;
     align-items: center;
     color: black;
 }
-
 
 .modal-content div {
     color: black;
@@ -72,12 +69,10 @@
     max-height: calc(100% - 40px);
     width: 100%;
     overflow-y: auto;
-    
     display: flex;
     flex-direction: column; /* ensure contents are stacked vertically */
     justify-content: center; /* ensure contents are centered horizontally */
     align-items: center; /* ensure contents are centered vertically */
-    
 }
 
 

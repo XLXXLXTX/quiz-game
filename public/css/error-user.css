@@ -1,3 +1,5 @@
+/* CSS file for error-user-not-logged.html */
+
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap');
 
 body {
@@ -24,14 +26,6 @@ body {
 
 }
 
-/* .error-container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  } */
-
 h3 {
 	color: #fff;
 	font-size: 30px;
@@ -49,17 +43,3 @@ a:visited {
 	color: #be97fa;
 	text-decoration: none;
 }
-
-.nigga {
-	color: black
-}
-/* a {
-	text-transform: uppercase;
-	color: black;
-}
-
-a:visited {
-	
-	color: black;
-	text-decoration: none;
-} */

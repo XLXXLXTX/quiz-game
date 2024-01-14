@@ -1,102 +1,108 @@
+/* CSS file for scoreboard.html */
+
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap');
 
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #121327;
-    font-family: 'Lexend', sans-serif;
-    color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	background-color: #121327;
+	font-family: 'Lexend', sans-serif;
+	color: #fff;
 }
 
+/*---------------------------------------*/
+/* CSS FOR SCORE'S TABLE                 */
+/*---------------------------------------*/
+
 table {
-    width: 60%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    box-shadow: 0 2px 15px rgba(64, 64, 64, .7);
-    border-radius: 12px 12px 0 0;
-    overflow: hidden;
+	width: 60%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	box-shadow: 0 2px 15px rgba(64, 64, 64, .7);
+	border-radius: 12px 12px 0 0;
+	overflow: hidden;
 }
 
 td,
 th {
-    padding: 15px 20px;
-    text-align: center;
+	padding: 15px 20px;
+	text-align: center;
 }
 
 th {
-    background-color: #6563b2;
-    color: #121327;
-    font-family: 'Lexend', Sans-serif;
-    font-weight: 300;
-    text-transform: uppercase;
+	background-color: #6563b2;
+	color: #121327;
+	font-family: 'Lexend', Sans-serif;
+	font-weight: 300;
+	text-transform: uppercase;
 }
 
 tr {
-    color: #121327;
-    width: 100%;
-    background-color: #fafafa;
-    font-family: 'Lexend', sans-serif;
+	color: #121327;
+	width: 100%;
+	background-color: #fafafa;
+	font-family: 'Lexend', sans-serif;
 }
 
 tr:nth-child(even) {
-    background-color: #eeeeee;
+	background-color: #eeeeee;
 }
 
 .back-button {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: inherit;
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	background-color: #3498db;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	font-family: inherit;
 }
 
 .back-button:hover {
-    background-color: #2980b9;
-    cursor: pointer;
+	background-color: #2980b9;
+	cursor: pointer;
 }
 
 .score-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
 }
 
 .score-title {
-    color: #fff;
-    padding: 10px;
-    font-size: 18px;
-    margin: 0;
+	color: #fff;
+	padding: 10px;
+	font-size: 18px;
+	margin: 0;
 }
 
 .score-text {
-    width: 57%;
-    font-size: 18px;
-    text-align: center;
-    border: 2px dashed #fff;
-    padding: 20px;
-    margin: 20px;
+	width: 57%;
+	font-size: 18px;
+	text-align: center;
+	border: 2px dashed #fff;
+	padding: 20px;
+	margin: 20px;
 }
 
 .header {
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    width: 100%;
-    box-sizing: border-box;
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 b {
-    color: #be97fa; 
+	color: #be97fa;
 }

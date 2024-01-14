@@ -1,8 +1,9 @@
+/* CSS file for questions.html */
+
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap');
 
 body {
 	display: flex;
-	/*flex-direction: column;*/
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
@@ -30,7 +31,9 @@ body {
 	margin-bottom: 20px;
 }
 
-
+/*---------------------------------------*/
+/* CSS FOR QUESTION'S TABLES OF EACH CAT.*/
+/*---------------------------------------*/
 
 table {
 	width: 100%;
@@ -41,21 +44,9 @@ table {
 	margin-bottom: 25px;
 	padding: 12px;
 	border-radius: 12px 12px 0 0;
-
 	box-shadow: 0 2px 15px rgba(64, 64, 64, .7);
 
 }
-
-/* .table-questions-users {
-    margin-top: 125%;
-    box-shadow: 0 2px 15px red;
-
-}
-
-.table-trivia {
-    
-    margin-top: 50px;
-} */
 
 td,
 th {
@@ -119,7 +110,9 @@ tr:nth-child(even) {
 
 }
 
-/*---CARDS CSS---*/
+/*---------------------------------------*/
+/* CARDS CSS FOR QUESTIONS CATEGORIES    */
+/*---------------------------------------*/
 
 .card-container {
 	max-width: 1500px;
@@ -298,7 +291,9 @@ tr:nth-child(even) {
 	background-color: #f39c12;
 }
 
-/***/
+/*---------------------------------------*/
+/* CSS FOR ADD QUESTION MODAL AND CONTENT*/
+/*---------------------------------------*/
 
 .add-question-container {
 	display: flex;
@@ -306,16 +301,13 @@ tr:nth-child(even) {
 	align-items: center;
 	margin-top: 5px;
 	margin-bottom: 5px;
-	/* Reduzco el margen inferior para reducir el espacio entre los contenedores */
 }
 
 .add-question-options-container {
 	display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+	flex-wrap: wrap;
+	justify-content: space-around;
 }
-
-
 
 .add-question-select,
 .add-question-label,
@@ -332,35 +324,31 @@ tr:nth-child(even) {
 	margin-right: 5px;
 }
 
-/* Estilos generales para el select */
 select {
 	width: auto;
 	max-width: 100%;
-    font-family: 'Lexend', sans-serif;
-    font-size: 14px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
-    cursor: pointer;
-    text-align: center;
+	font-family: 'Lexend', sans-serif;
+	font-size: 14px;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
 }
 
-/* Estilo al pasar el ratón sobre el select */
 select:hover {
-    border-color: #333;
+	border-color: #333;
 }
 
-/* Estilo cuando el select está enfocado */
 select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+	border-color: #007bff;
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Estilo para las opciones dentro del select */
 select option {
-    font-family: 'Lexend', sans-serif;
-    font-size: 14px;
+	font-family: 'Lexend', sans-serif;
+	font-size: 14px;
 }
 
 .add-question-submit {
