@@ -44,7 +44,7 @@ const createQuiz = async (req, res) => {
 	if (!response.ok) {
 		//throw new Error(`HTTP error! Status: ${response.status}\n${response}`);
 		console.log(`HTTP error! Status: ${response.status}\n${response}`);
-		return {}
+		return {error: `HTTP error! Status: ${response.status}\n${response}`}
 	}
 
 	let data = await response.json();
@@ -52,7 +52,7 @@ const createQuiz = async (req, res) => {
 	if (data.response_code !== 0) {
 		//throw new Error(`API error! Response code: ${data.response_code}\n${data}`);
 		console.log(`API error! Response code: ${data.response_code}\n${data}`);
-		return {}
+		return { error: `API error ${data.response_code}`}
 	}
 
 	let questionsRaw = data.results;

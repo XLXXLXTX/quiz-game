@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		const categories = c.map(category => ({
 			name: category.categoryName,
-			value: category.categoryValue
+			value: category.categoryName
 		}));
 		const difficulties = [{ name: 'Easy', value: 'easy'}, {name: 'Medium', value:'medium'}, {name: 'Hard', value: 'hard'}];
 		const types = [{name:'Multiple choice', value: 'multiple'}, {name:'True/False', value: 'boolean'}];
