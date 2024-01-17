@@ -81,10 +81,14 @@ async function fetchQuestions(category, difficulty, type) {
 	const data = { category, difficulty, type };
 	let response = await axios.post('/api/create-quiz', data);
 
+	console.log('fetchQuestions');
+
 	if (!response.data) {
 		alert('Error: Invalid token');
 		throw new Error('Invalid token');
 	}
+
+	console.log('fetchQuestions -> response.data:', response.data);
 
 	if (response.data.error) {
 		alert('Try again with other category');
