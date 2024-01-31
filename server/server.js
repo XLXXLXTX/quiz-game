@@ -66,8 +66,21 @@ const io = socketIo(server);
 //  DB SECTION
 //--------------------------------------------------
 
-// connect to DB
-connectDB();
+// obtain the arguments passed to the script
+const args = process.argv.slice(2);
+
+// verify if the local environment is set
+const isLocalEnvironment = args.includes('--env=local');
+
+if (isLocalEnvironment) {
+	console.log('Setting database for local environment...⌛');
+	connectDB(process.env.MONGODB_SERVER_LOCAL, process.env.MONGODB_URL_LOCAL, process.env.MONGODB_PORT_LOCAL);
+} else {
+	console.log('Setting database for mongodb atlas...⌛');
+	// connect to DB
+	connectDB(process.env.MONGODB_SERVER, process.env.MONGODB_URL);
+}
+
 
 //--------------------------------------------------
 // ROUTES SECTION

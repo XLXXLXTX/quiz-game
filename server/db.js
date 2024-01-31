@@ -2,19 +2,25 @@
 
 const mongoose = require('mongoose');
 
-const connectDB = async () => {
-  try {
+const connectDB = async (server, url, port = null) => {
+    try {
+        // load db uri for mongoose connection 
+        let uri = `${url}://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${server}`;
 
-    // load db uri for mongoose connection 
-    const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.zmy1u5t.mongodb.net/${process.env.MONGODB_DB}`;
+        if (port) {
+            uri = `${uri}:${port}`;
+        }
 
-    console.log(`⌛ Connecting to Database with the string connection ...`); //:\n\t ${uri}`)
-    await mongoose.connect(uri);
+        uri = `${uri}/${process.env.MONGODB_DB}`;
 
-    console.log('✅ Connected to MongoDB!');
-  } catch (error) {
-    console.error('❌ Error in the connection :', error);
-  }
+        console.log(`⌛ Connecting to Database with the string connection ...`); //:\n\t ${uri}`)
+        await mongoose.connect(uri);
+
+        console.log('✅ Connected to MongoDB!');
+    } catch (error) {
+        console.error('❌ Error in the connection :', error);
+    }
 };
+
 
 module.exports = { connectDB };
