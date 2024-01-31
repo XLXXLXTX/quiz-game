@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo
+    container_name: local-mongodb
+    ports:
+      - "${MONGODB_PORT_LOCAL:-27017}:27017"
+    volumes:
+      - ../.env:/docker-entrypoint-initdb.d/.env
+      - ./init/init-script.js:/docker-entrypoint-initdb.d/init-script.js
+
+volumes:
+  mongo-data:
