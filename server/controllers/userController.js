@@ -18,7 +18,7 @@ const getAllUsers = async (req, res) => {
 	try {
 
 		// only retrieve username from DB, not password or id fields
-		const users = await User.find({}, { _id: 0, username: 1, password: 0});
+		const users = await User.find({}, { "username": 1, "_id": 0 });
 		res.json(users);
 
 	} catch (error) {
